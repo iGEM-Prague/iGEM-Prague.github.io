@@ -1,0 +1,187 @@
+<!--
+Copyright © 2024 Panos Sakkos <panos.sakkos@gmail.com>. All rights reserved.
+This code is part of my personal blog and is not licensed for redistribution or modification.
+To use this Jekyll theme, visit: https://github.com/le4ker/personal-jekyll-theme
+-->
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"
+  integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+></script>
+
+<!--
+  * Start Bootstrap - Grayscale Bootstrap Theme (http://startbootstrap.com)
+  * Code licensed under the Apache License v2.0.
+  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+-->
+
+<script>
+  // Toggle navbar background on scroll
+  function toggleNavCollapse() {
+    const navbar = document.querySelector(".navbar");
+    const fixedTop = document.querySelector(".fixed-top");
+    if (navbar && fixedTop) {
+      if (navbar.getBoundingClientRect().top + window.scrollY > 50) {
+        fixedTop.classList.add("top-nav-collapse");
+      } else {
+        fixedTop.classList.remove("top-nav-collapse");
+      }
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", toggleNavCollapse);
+  window.addEventListener("scroll", toggleNavCollapse);
+
+  // Smooth scrolling for page-scroll links
+  document.addEventListener("DOMContentLoaded", function () {
+    // Custom smooth scroll with easing
+    function smoothScrollTo(targetPosition, duration) {
+      const startPosition = window.scrollY;
+      const distance = targetPosition - startPosition;
+      let startTime = null;
+
+      function easeOutCubic(t) {
+        return 1 - Math.pow(1 - t, 3);
+      }
+
+      function animation(currentTime) {
+        if (startTime === null) startTime = currentTime;
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easeProgress = easeOutCubic(progress);
+
+        window.scrollTo(0, startPosition + distance * easeProgress);
+
+        if (elapsed < duration) {
+          requestAnimationFrame(animation);
+        }
+      }
+
+      requestAnimationFrame(animation);
+    }
+
+    document.querySelectorAll("a.page-scroll").forEach(function (link) {
+      link.addEventListener("click", function (e) {
+        const href = this.getAttribute("href");
+        const target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          const targetPosition =
+            target.getBoundingClientRect().top + window.scrollY - 50;
+          smoothScrollTo(targetPosition, 800);
+          this.blur();
+        }
+      });
+    });
+
+    // Close navbar when a nav link is clicked (mobile)
+    document
+      .querySelectorAll(".navbar-collapse ul li a")
+      .forEach(function (link) {
+        link.addEventListener("click", function () {
+          const toggler = document.querySelector(".navbar-toggler");
+          if (toggler && window.getComputedStyle(toggler).display !== "none") {
+            toggler.click();
+          }
+        });
+      });
+  });
+</script>
+
+<!-- Collapse navbar when navbar-brand is clicked -->
+
+<script>
+  document
+    .querySelector(".navbar-brand")
+    .addEventListener("click", function () {
+      const navbarCollapse = document.getElementById("navbarNav");
+
+      if (navbarCollapse.classList.contains("show")) {
+        const collapseInstance =
+          bootstrap.Collapse.getInstance(navbarCollapse) ||
+          new bootstrap.Collapse(navbarCollapse);
+        collapseInstance.hide();
+      }
+    });
+</script>
+
+<!-- Collapse navbar when clicked outside of it -->
+
+<script>
+  document.addEventListener("click", function (event) {
+    const navbar = document.querySelector(".navbar-collapse");
+    const isClickInsideNavbar = navbar.contains(event.target);
+    const isNavbarOpen = navbar.classList.contains("show");
+
+    if (!isClickInsideNavbar && isNavbarOpen) {
+      const collapseInstance =
+        bootstrap.Collapse.getInstance(navbar) ||
+        new bootstrap.Collapse(navbar);
+      collapseInstance.hide();
+    }
+  });
+</script>
+
+<!-- Theme toggle -->
+
+<script>
+  (function () {
+    var btn = document.getElementById("theme-toggle");
+    if (!btn) return;
+    btn.addEventListener("click", function () {
+      var next =
+        document.documentElement.getAttribute("data-theme") === "dark"
+          ? "light"
+          : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      try {
+        localStorage.setItem("theme", next);
+      } catch (e) {}
+    });
+  })();
+</script>
+
+{% if page.section-type == "index" %}
+
+<!-- Dynamic Typing Start -->
+
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.16/typed.umd.js"
+  integrity="sha512-+2pW8xXU/rNr7VS+H62aqapfRpqFwnSQh9ap6THjsm41AxgA0MhFRtfrABS+Lx2KHJn82UOrnBKhjZOXpom2LQ=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+></script>
+<script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    new Typed(".intro-text", {
+      strings: ["{{ site.quote }}"],
+      typeSpeed: 50,
+      startDelay: 1000,
+      loop: false,
+      cursorChar: "|",
+    });
+  });
+</script>
+
+<!-- Dynamic Typing End  -->
+
+<!-- Share buttons Start -->
+
+<script>
+  document.querySelectorAll(".share-buttons a.popup").forEach(function (link) {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+      window.open(
+        this.href,
+        "share",
+        "width=550,height=400,toolbar=0,menubar=0,location=0",
+      );
+    });
+  });
+</script>
+
+<!-- Share buttons End -->
+
+{% endif %}

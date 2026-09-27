@@ -1,0 +1,62 @@
+<!-- Post Layout Start -->
+
+<!doctype html>
+<html lang="{{site.lang}}">
+  {% include head.html %}
+
+  <body>
+    {% include navigation.html %}
+
+    <section id="post" class="container content-section">
+      <div class="row">
+        <div class="col-md-10 offset-md-1">
+          <h2 class="text-center">{{ page.title }}</h2>
+          <h6 class="text-center">
+            {{ page.date | date_to_string }}
+            <small>
+              .
+              <a
+                class="category"
+                href="{{ '/categories/' | absolute_url }}{{ page.category | downcase }}.html"
+              >
+                {{ page.category }}
+              </a>
+              <br />
+              {% for tag in page.tags %}
+              <a class="tag" href="{{ '/tags/' | absolute_url }}{{ tag }}.html">#{{ tag }}</a>
+              {% endfor %}
+            </small>
+          </h6>
+
+          <section class="text-justify pt-5">
+            {{ page.content | markdownify }}
+          </section>
+
+          {% include share.html %}
+
+          <hr />
+
+          {% if site.author_blurb %}
+          <div class="author row">
+            <div class="col-4 col-sm-3 col-md-2">
+              <img
+                class="img-fluid"
+                src="{{ site.author_blurb_image | absolute_url }}"
+                alt="Me"
+              />
+            </div>
+            <div class="col-8 col-sm-9 col-md-10 blurb">
+              <p>{{ site.author_blurb }}</p>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </section>
+
+    {% include footer.html %}
+    {% include js.html %}
+  </body>
+</html>
+
+<!-- Post Layout End -->

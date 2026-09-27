@@ -1,0 +1,102 @@
+<!-- Head Start -->
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="{{site.description}}" />
+  <meta name="author" content="{{site.author}}" />
+  <meta name="keywords" content="{{site.keywords}}" />
+  {% if page.layout == "error" %}
+  <meta http-equiv="refresh" content="20; url=/" />
+  {% endif %}
+  <title>{{site.title}}{% if page.title %} | {{page.title}}{% endif %}</title>
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("theme") || "light";
+        document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="canonical" href="{{ page.url | absolute_url | replace:'index.html' }}" />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
+    integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  <link href="{{ '/css/grayscale.css' | relative_url }}" rel="stylesheet" />
+
+  {% if page.layout == "post" %}
+  <link href="{{ '/css/everforest.css' | relative_url }}" rel="stylesheet" />
+  <link href="{{ '/css/share.css' | relative_url }}" rel="stylesheet" />
+  {% endif %}
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400..900&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    rel="stylesheet"
+    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  {% comment %}
+  Google Analytics + cookie consent banner, disabled for now.
+  To enable: remove the comment tags wrapping the block below and set
+  google-tracking-id in _config.yml.
+  {% endcomment %}
+  {% comment %}
+  {% if site.google-tracking-id %}
+
+  <!-- Cookie Consent by TermsFeed https://www.TermsFeed.com -->
+  <script
+    type="text/javascript"
+    src="https://www.termsfeed.com/public/cookie-consent/4.1.0/cookie-consent.js"
+    charset="UTF-8"
+  ></script>
+  <script type="text/javascript" charset="UTF-8">
+    document.addEventListener("DOMContentLoaded", function () {
+      cookieconsent.run({
+        notice_banner_type: "simple",
+        consent_type: "express",
+        palette: "light",
+        language: "en",
+        page_load_consent_levels: ["strictly-necessary"],
+        notice_banner_reject_button_hide: false,
+        preferences_center_close_button_hide: false,
+        page_refresh_confirmation_buttons: false,
+        website_name: "{{ '/' | absolute_url }}",
+      });
+    });
+  </script>
+
+  <!-- Google Analytics -->
+
+  <script
+    type="text/plain"
+    data-cookie-consent="tracking"
+    async
+    src="https://www.googletagmanager.com/gtag/js?id={{site.google-tracking-id}}"
+  ></script>
+  <script type="text/plain" data-cookie-consent="tracking">
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{site.google-tracking-id}}');
+  </script>
+  {% endif %}
+  {% endcomment %}
+
+  {% include schema.html %}
+</head>
+
+<!-- Head End -->

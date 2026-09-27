@@ -1,0 +1,18 @@
+<!-- Post List Start -->
+
+<div class="post-list-item">
+  <span class="post-date">{{ post.date | date_to_string }}</span>
+  <span class="post-category">
+    <a
+      class="category"
+      href="{{ '/categories/' | absolute_url }}{{ post.category | downcase }}.html"
+    >
+      {{ post.category }}
+    </a>
+  </span>
+  <span class="post-title">
+    <a href="{{ post.url | absolute_url }}">{{ post.title }}</a>
+  </span>
+</div>
+
+<!-- Post List End -->

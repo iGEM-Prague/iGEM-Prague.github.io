@@ -1,0 +1,128 @@
+# Site settings
+
+# NB! Set your site's url, otherwise nothing will work.
+# Replace ORG and REPO with your actual GitHub org/repo names.
+url: "https://igem-prague.github.io/"
+baseurl: ""
+
+# Google tracking id. GA + cookie banner are currently commented out in
+# _includes/head.html; uncomment there and set the id to enable.
+google-tracking-id: ""
+
+#############
+# HTML Head #
+#############
+
+lang: "en"
+author: "iGEM Prague Team"
+title: "iGEM Prague"
+description: "TODO description"
+keywords: "iGEM team, synthetic biology, bioengineering, microalgae, space"
+favicon: "/img/favicon.ico"
+
+################
+# Header layout#
+################
+
+black-favicon: "/img/favicon.ico"
+background-img: "/img/background.jpg"
+
+##############################
+# Dynamic Text on the Header #
+##############################
+
+quote: "TODO header text"
+# me-img: "/img/team-logo.png"
+
+# To use a GitHub org avatar instead, uncomment and set your org name:
+me-img: "https://github.com/iGEM-Prague.png?size=500"
+
+#######
+# Blog #
+########
+
+post-preview-words: 96
+paginate: 12
+email-share: True
+fb-share: True
+linkedin-share: True
+reddit-share: True
+x-share: True
+hackernews-share: False
+tumblr-share: False
+pinterest-share: False
+pocket-share: False
+vkontakte-share: False
+
+############
+# Timeline #
+############
+
+events:
+  - image: "/img/team-logo.png"
+    date: "September 2026 - Today"
+    description: "TODO timeline"
+  - image: "/img/team-logo.png"
+    date: "June 2026"
+    description: "TODO timeline"
+
+# First image of the Timeline
+timeline-img: "/img/team-logo.png"
+
+###########
+# Contact #
+###########
+
+email: "TODO email"
+
+################
+# Author Blurb #
+################
+
+# This text appears underneath each blog post.
+author_blurb_image: "/img/team-logo.png"
+author_blurb:
+  "TODO author blurb"
+
+##################
+# Social Buttons #
+##################
+
+social:
+  - icon: "github"
+    url: "https://github.com/iGEM-Prague/"
+  - icon: "instagram"
+    url: "https://www.instagram.com/igem_prague/"
+  # - icon: "x-twitter"
+  #   url: "https://twitter.com/your-team"
+  # - icon: "rss"
+  #   url: "https://your-org.github.io/your-repo-name/feed.xml"
+
+# NB! Tread carefully if you want to change the variables below this point!
+
+# Sections shown on the home page, in order
+pages_list:
+  About: "about"
+  Blog: "latest-post"
+  Timeline: "timeline"
+  Contact: "contact"
+
+syntax_theme: everforest
+
+# Exclusion list from the generated _site
+exclude:
+  - LICENSE
+  - README.md
+  - Dockerfile
+  - docker-compose.yml
+
+# Pagination path
+paginate_path: "blog/page:num/"
+
+# Enable minification of SASS
+sass:
+  style: compressed
+
+plugins:
+  - jekyll-paginate
+  - jekyll-spaceship
