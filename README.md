@@ -2,7 +2,7 @@
 
 Built with [personal-jekyll-theme](https://github.com/le4ker/personal-jekyll-theme).
 
-Everything is static and typed in [Markdown](https://www.markdownguide.org/cheat-sheet/)
+Everything is static and typed in [Markdown](https://www.markdownguide.org/cheat-sheet/).
 
 ## Local preview (using Docker)
 
