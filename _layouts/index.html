@@ -15,9 +15,9 @@
 
     {% include header.html %} 
     {% for p in site.pages_list %} 
-      {% for page in site.pages %} 
+      {% for page in site.sections %} 
         {% if p[1] == page.section-type %} 
-          {% include {{ page.path }} %} 
+          {% include {{ page.slug }}.html %} 
         {% endif %} 
       {% endfor %}
     {% endfor %} 

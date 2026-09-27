@@ -109,6 +109,12 @@ pages_list:
 
 syntax_theme: everforest
 
+# Home page sections (_sections/*.html). Not written as standalone pages;
+# each is rendered on the home page through _includes/<same name>.html
+collections:
+  sections:
+    output: false
+
 # Exclusion list from the generated _site
 exclude:
   - LICENSE
