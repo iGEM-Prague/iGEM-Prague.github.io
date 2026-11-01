@@ -109,7 +109,7 @@ pages_list:
 
 syntax_theme: everforest
 
-# Home page sections (_sections/*.html). Not written as standalone pages;
+# Home page sections (_sections/*.md). Not written as standalone pages;
 # each is rendered on the home page through _includes/<same name>.html
 collections:
   sections:

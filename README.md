@@ -4,6 +4,8 @@ Built with [personal-jekyll-theme](https://github.com/le4ker/personal-jekyll-the
 
 Everything is static and typed in [Markdown](https://www.markdownguide.org/cheat-sheet/).
 
+TODOs are in the file [TODO.md](./TODO.md).
+
 ## Local preview (using Docker)
 
 First time (or after modifying the Dockerfile / Gemfile):
