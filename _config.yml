@@ -2,7 +2,7 @@
 
 # NB! Set your site's url, otherwise nothing will work.
 # Replace ORG and REPO with your actual GitHub org/repo names.
-url: "https://igem-prague.github.io/"
+url: "https://igem-prague.github.io"
 baseurl: ""
 
 # Google tracking id. GA + cookie banner are currently commented out in
@@ -24,7 +24,6 @@ favicon: "/img/favicon.ico"
 # Header layout#
 ################
 
-black-favicon: "/img/favicon.ico"
 background-img: "/img/background.jpg"
 
 ##############################
@@ -32,7 +31,7 @@ background-img: "/img/background.jpg"
 ##############################
 
 quote: "TODO header text"
-# me-img: "/img/team-logo.png"
+# me-img: "/img/team-logo.webp"
 
 # To use a GitHub org avatar instead, uncomment and set your org name:
 me-img: "https://github.com/iGEM-Prague.png?size=500"
@@ -59,15 +58,15 @@ vkontakte-share: False
 ############
 
 events:
-  - image: "/img/team-logo.png"
+  - image: "/img/team-logo.webp"
     date: "September 2026 - Today"
     description: "TODO timeline"
-  - image: "/img/team-logo.png"
+  - image: "/img/team-logo.webp"
     date: "June 2026"
     description: "TODO timeline"
 
 # First image of the Timeline
-timeline-img: "/img/team-logo.png"
+timeline-img: "/img/team-logo.webp"
 
 ###########
 # Contact #
@@ -80,7 +79,7 @@ email: "TODO email"
 ################
 
 # This text appears underneath each blog post.
-author_blurb_image: "/img/team-logo.png"
+author_blurb_image: "/img/team-logo.webp"
 author_blurb:
   "TODO author blurb"
 
