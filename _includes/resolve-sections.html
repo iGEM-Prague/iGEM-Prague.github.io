@@ -1,0 +1,30 @@
+{%- comment -%}
+  Finds the section folder this page belongs to and sets:
+    sec_dir     ""  for the main page, "2026" for the 2026 pages and posts
+    sec_prefix  "_sections/" or "_sections/2026/"
+    sec_base    URL of the page showing those sections: "/" or "/2026/"
+    sec_index   the folder's index.md (header-text, sections order)
+  Falls back to the main page when the year has no _sections/<year>/index.md.
+{%- endcomment -%}
+{%- if page.sections-dir -%}
+  {%- assign sec_dir = page.sections-dir | append: "" -%}
+{%- elsif page.year -%}
+  {%- assign sec_dir = page.year | append: "" -%}
+{%- elsif page.layout == "post" -%}
+  {%- assign sec_dir = page.date | date: "%Y" -%}
+{%- else -%}
+  {%- assign sec_dir = "" -%}
+{%- endif -%}
+{%- assign sec_index_path = "_sections/" | append: sec_dir | append: "/index.md" | replace: "//", "/" -%}
+{%- assign sec_index = site.sections | where: "relative_path", sec_index_path | first -%}
+{%- unless sec_index -%}
+  {%- assign sec_dir = "" -%}
+  {%- assign sec_index = site.sections | where: "relative_path", "_sections/index.md" | first -%}
+{%- endunless -%}
+{%- if sec_dir == "" -%}
+  {%- assign sec_prefix = "_sections/" -%}
+  {%- assign sec_base = "/" -%}
+{%- else -%}
+  {%- assign sec_prefix = "_sections/" | append: sec_dir | append: "/" -%}
+  {%- assign sec_base = "/" | append: sec_dir | append: "/" -%}
+{%- endif -%}

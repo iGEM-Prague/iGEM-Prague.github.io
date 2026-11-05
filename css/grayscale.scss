@@ -353,6 +353,7 @@ a {
 .btn-default {
   color: var(--secondary-color);
   background-color: transparent;
+  border: 1px solid var(--secondary-color);
 }
 
 .btn-default:hover,
@@ -443,6 +444,9 @@ ul.social-buttons li a {
 
 .post-list-container {
   margin-top: 3.11rem;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 65ch;
 }
 
 footer {
@@ -785,4 +789,66 @@ body {
 }
 [data-theme="dark"] .theme-toggle .theme-icon-dark {
   display: inline-block;
+}
+
+// Timeline project links
+.timeline .timeline-heading h4.subheading a {
+  color: var(--secondary-color);
+}
+
+// Post previews in the News section of a year page
+// (beats the theme's ".content-section.text-center p" centering)
+.content-section.text-center p.post-preview,
+.post-preview {
+  text-align: left;
+  margin: 0;
+  padding: 0.75rem 0 0;
+  font-size: 0.95em;
+  color: var(--font-color-light);
+}
+
+// News page: search box and category filter
+.news-filter {
+  max-width: 65ch;
+  margin: 0 auto 2rem;
+
+  .form-control {
+    border-radius: 0;
+    color: var(--font-color);
+    background-color: var(--primary-color);
+    border-color: var(--font-color-faint-3);
+
+    &::placeholder {
+      color: var(--font-color-light);
+    }
+  }
+}
+
+.category-filter {
+  margin: 0 0.25rem 0.5rem;
+
+  &.active {
+    color: var(--primary-color);
+    background-color: var(--secondary-color);
+  }
+}
+
+// Members page
+.member {
+  margin-bottom: 3rem;
+}
+
+.member-photo {
+  width: 10rem;
+  height: 10rem;
+  object-fit: cover;
+}
+
+.member-role {
+  color: var(--secondary-color);
+  margin-bottom: 0.5rem;
+}
+
+.member-bio {
+  font-size: 0.95em;
 }

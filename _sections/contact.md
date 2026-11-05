@@ -1,5 +1,4 @@
 ---
-section-type: contact
 title: Contact
 ---
 

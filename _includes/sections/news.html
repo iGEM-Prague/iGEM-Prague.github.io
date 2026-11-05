@@ -1,0 +1,27 @@
+<!-- News Start: latest posts of the year -->
+
+<section id="{{ section.slug }}" class="container content-section text-center">
+  <div class="row justify-content-center">
+    <div class="col-md-10 col-12">
+      {{ section.content | markdownify }}
+
+      {% assign news_count = 0 %}
+      <div class="post-list-container">
+        {% for post in site.posts %}
+          {% assign post_year = post.date | date: "%Y" %}
+          {% if post_year == sec_dir and news_count < 3 %}
+            {% assign news_count = news_count | plus: 1 %}
+            {% include post-list.html preview=true %}
+          {% endif %}
+        {% endfor %}
+      </div>
+      {% if news_count == 0 %}
+      <p class="pt-4">No news yet.</p>
+      {% endif %}
+
+      <a class="btn btn-default btn-lg mt-4" href="{{ sec_base | append: 'news/' | relative_url }}">All news</a>
+    </div>
+  </div>
+</section>
+
+<!-- News End -->

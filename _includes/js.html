@@ -142,7 +142,7 @@ To use this Jekyll theme, visit: https://github.com/le4ker/personal-jekyll-theme
   })();
 </script>
 
-{% if page.section-type == "index" %}
+{% if page.layout == "sections" %}
 
 <!-- Dynamic Typing Start -->
 
@@ -156,7 +156,7 @@ To use this Jekyll theme, visit: https://github.com/le4ker/personal-jekyll-theme
 <script type="text/javascript">
   document.addEventListener("DOMContentLoaded", function () {
     new Typed(".intro-text", {
-      strings: ["{{ site.quote }}"],
+      strings: [{{ header_text | jsonify }}],
       typeSpeed: 50,
       startDelay: 1000,
       loop: false,
@@ -166,6 +166,8 @@ To use this Jekyll theme, visit: https://github.com/le4ker/personal-jekyll-theme
 </script>
 
 <!-- Dynamic Typing End  -->
+
+{% endif %}
 
 <!-- Share buttons Start -->
 
@@ -183,5 +185,3 @@ To use this Jekyll theme, visit: https://github.com/le4ker/personal-jekyll-theme
 </script>
 
 <!-- Share buttons End -->
-
-{% endif %}

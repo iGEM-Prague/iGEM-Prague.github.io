@@ -1,4 +1,5 @@
 <!-- Post Layout Start -->
+{%- assign post_year = page.date | date: "%Y" -%}
 
 <!doctype html>
 <html lang="{{site.lang}}">
@@ -13,24 +14,20 @@
           <h2 class="text-center">{{ page.title }}</h2>
           <h6 class="text-center">
             {{ page.date | date_to_string }}
+            {% assign news_url = "/" | append: post_year | append: "/news/" | relative_url %}
+            {% for category in page.categories %}
             <small>
               .
-              <a
-                class="category"
-                href="{{ '/categories/' | absolute_url }}{{ page.category | downcase }}.html"
-              >
-                {{ page.category }}
-              </a>
-              <br />
-              {% for tag in page.tags %}
-              <a class="tag" href="{{ '/tags/' | absolute_url }}{{ tag }}.html">#{{ tag }}</a>
-              {% endfor %}
+              <a class="category" href="{{ news_url }}?category={{ category | downcase | url_encode }}">{{ category }}</a>
             </small>
+            {% endfor %}
           </h6>
 
           <section class="text-justify pt-5">
             {{ page.content | markdownify }}
           </section>
+
+          <p class="text-center pt-4"><a href="{{ news_url }}">&larr; All news from {{ post_year }}</a></p>
 
           {% include share.html %}
 
@@ -41,8 +38,8 @@
             <div class="col-4 col-sm-3 col-md-2">
               <img
                 class="img-fluid"
-                src="{{ site.author_blurb_image | absolute_url }}"
-                alt="Me"
+                src="{{ site.author_blurb_image | relative_url }}"
+                alt="{{ site.author }}"
               />
             </div>
             <div class="col-8 col-sm-9 col-md-10 blurb">

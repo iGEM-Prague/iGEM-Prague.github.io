@@ -1,18 +1,27 @@
 <!-- Post List Start -->
+{%- assign post_year = post.date | date: "%Y" -%}
+{%- assign news_url = "/" | append: post_year | append: "/news/" | relative_url -%}
+{%- capture post_search -%}
+  {{ post.title }} {{ post.categories | join: " " }} {{ post.content | strip_html }}
+{%- endcapture %}
 
-<div class="post-list-item">
+<div
+  class="post-list-item"
+  data-categories="{{ post.categories | join: '|' | downcase | escape }}"
+  data-search="{{ post_search | strip_newlines | downcase | escape }}"
+>
   <span class="post-date">{{ post.date | date_to_string }}</span>
+  {% for category in post.categories %}
   <span class="post-category">
-    <a
-      class="category"
-      href="{{ '/categories/' | absolute_url }}{{ post.category | downcase }}.html"
-    >
-      {{ post.category }}
-    </a>
+    <a class="category" href="{{ news_url }}?category={{ category | downcase | url_encode }}">{{ category }}</a>
   </span>
+  {% endfor %}
   <span class="post-title">
-    <a href="{{ post.url | absolute_url }}">{{ post.title }}</a>
+    <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
   </span>
+  {% if include.preview %}
+  <p class="post-preview">{{ post.content | strip_html | truncatewords: site.post-preview-words }}</p>
+  {% endif %}
 </div>
 
 <!-- Post List End -->

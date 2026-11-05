@@ -1,0 +1,32 @@
+<!-- Sections Layout Start (main page and year pages) -->
+{% include resolve-sections.html %}
+{%- assign header_text = sec_index.header-text -%}
+
+<!doctype html>
+<html lang="{{site.lang}}">
+
+  {% include head.html %}
+
+  <body
+    id="page-top"
+    data-spy="scroll"
+    data-target=".navbar-fixed-top"
+    data-offset="151"
+  >
+    {% include navigation.html %}
+
+    {% include header.html %}
+    {% for slug in sec_index.sections %}
+      {% assign section_path = sec_prefix | append: slug | append: ".md" %}
+      {% assign section = site.sections | where: "relative_path", section_path | first %}
+      {% include sections/{{ slug }}.html %}
+    {% endfor %}
+
+    {% include footer.html %}
+
+    {% include js.html %}
+
+  </body>
+</html>
+
+<!-- Sections Layout End -->

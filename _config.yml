@@ -26,22 +26,17 @@ favicon: "/img/favicon.ico"
 
 background-img: "/img/background.jpg"
 
-##############################
-# Dynamic Text on the Header #
-##############################
+# Logo in the header of the main page and year pages.
+# The text typed above it is set in _sections/index.md (main page)
+# and _sections/<year>/index.md (year pages).
+me-img: "/img/team-logo.webp"
 
-quote: "TODO header text"
-# me-img: "/img/team-logo.webp"
-
-# To use a GitHub org avatar instead, uncomment and set your org name:
-me-img: "https://github.com/iGEM-Prague.png?size=500"
-
-#######
-# Blog #
+########
+# News #
 ########
 
-post-preview-words: 96
-paginate: 12
+# Length of post previews in the News section of a year page
+post-preview-words: 50
 email-share: True
 fb-share: True
 linkedin-share: True
@@ -57,15 +52,8 @@ vkontakte-share: False
 # Timeline #
 ############
 
-events:
-  - image: "/img/team-logo.webp"
-    date: "September 2026 - Today"
-    description: "TODO timeline"
-  - image: "/img/team-logo.webp"
-    date: "June 2026"
-    description: "TODO timeline"
-
-# First image of the Timeline
+# Timeline entries are in _data/timeline.yml.
+# Image shown at the end of the timeline:
 timeline-img: "/img/team-logo.webp"
 
 ###########
@@ -99,20 +87,23 @@ social:
 
 # NB! Tread carefully if you want to change the variables below this point!
 
-# Sections shown on the home page, in order
-pages_list:
-  About: "about"
-  Blog: "latest-post"
-  Timeline: "timeline"
-  Contact: "contact"
-
 syntax_theme: everforest
 
-# Home page sections (_sections/*.md). Not written as standalone pages;
-# each is rendered on the home page through _includes/<same name>.html
+# Page sections: _sections/*.md for the main page, _sections/<year>/*.md for
+# year pages. Not written as standalone pages; each section is rendered through
+# _includes/sections/<file name>.html. Order is set in the folder's index.md.
 collections:
   sections:
     output: false
+
+# News posts (_posts/<year>/YYYY-MM-DD-title.md) end up at /<year>/news/MM/DD/title/
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      permalink: "/:year/news/:month/:day/:title/"
 
 # Exclusion list from the generated _site
 exclude:
@@ -120,14 +111,11 @@ exclude:
   - README.md
   - Dockerfile
   - docker-compose.yml
-
-# Pagination path
-paginate_path: "blog/page:num/"
+  - TODO.md
 
 # Enable minification of SASS
 sass:
   style: compressed
 
 plugins:
-  - jekyll-paginate
   - jekyll-spaceship

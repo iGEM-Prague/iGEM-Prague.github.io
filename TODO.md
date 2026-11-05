@@ -24,3 +24,10 @@
   - Move to the current year section -- Janči []
 - README.md
   - Update with new info, document how to edit different things -- Janči []
+
+## Photos
+- Team logo
+- Favicon
+- Better project photo
+- Team members
+- Team -- together

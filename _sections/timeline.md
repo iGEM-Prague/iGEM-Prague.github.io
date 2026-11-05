@@ -1,5 +1,4 @@
 ---
-section-type: timeline
 title: Timeline
 ---
 

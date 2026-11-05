@@ -1,0 +1,117 @@
+<!-- News Layout Start: all posts of one year, with search and category filter -->
+{% include resolve-sections.html %}
+{%- assign section_path = sec_prefix | append: "news.md" -%}
+{%- assign section = site.sections | where: "relative_path", section_path | first -%}
+
+{%- assign year_posts = "" | split: "" -%}
+{%- assign categories = "" | split: "" -%}
+{%- for post in site.posts -%}
+  {%- assign post_year = post.date | date: "%Y" -%}
+  {%- if post_year == sec_dir -%}
+    {%- assign year_posts = year_posts | push: post -%}
+    {%- assign categories = categories | concat: post.categories -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign categories = categories | uniq | sort_natural -%}
+
+<!doctype html>
+<html lang="{{site.lang}}">
+  {% include head.html %}
+
+  <body>
+    {% include navigation.html %}
+
+    <section id="news" class="container content-section text-center">
+      <div class="row justify-content-center">
+        <div class="col-md-10 col-12">
+          {{ section.content | markdownify }}
+
+          <div class="news-filter pt-3">
+            <input
+              type="search"
+              id="news-search"
+              class="form-control"
+              placeholder="Search news…"
+              aria-label="Search news"
+            />
+            {% if categories.size > 0 %}
+            <div class="news-categories pt-3" role="group" aria-label="Filter by category">
+              <button type="button" class="btn btn-default category-filter" data-category="">All</button>
+              {% for category in categories %}
+              <button type="button" class="btn btn-default category-filter" data-category="{{ category | downcase | escape }}">{{ category }}</button>
+              {% endfor %}
+            </div>
+            {% endif %}
+          </div>
+
+          <div id="news-list" class="post-list-container">
+            {% for post in year_posts %}
+              {% include post-list.html %}
+            {% endfor %}
+          </div>
+          <p id="news-empty" class="pt-4" hidden>
+            {% if year_posts.size > 0 %}No news match your search.{% else %}No news yet.{% endif %}
+          </p>
+        </div>
+      </div>
+    </section>
+
+    {% include footer.html %}
+    {% include js.html %}
+
+    <script>
+      (function () {
+        var input = document.getElementById("news-search");
+        var buttons = document.querySelectorAll(".category-filter");
+        var items = document.querySelectorAll("#news-list .post-list-item");
+        var empty = document.getElementById("news-empty");
+        var params = new URLSearchParams(window.location.search);
+        var category = (params.get("category") || "").toLowerCase();
+        input.value = params.get("q") || "";
+
+        // Case- and diacritics-insensitive: "vesmir" finds "vesmír"
+        function normalize(text) {
+          return text.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+        }
+
+        function apply() {
+          var words = normalize(input.value).split(/\s+/).filter(Boolean);
+          var shown = 0;
+          items.forEach(function (item) {
+            var categories = item.dataset.categories.split("|");
+            var text = normalize(item.dataset.search);
+            var match =
+              (!category || categories.indexOf(category) !== -1) &&
+              words.every(function (word) {
+                return text.indexOf(word) !== -1;
+              });
+            item.style.display = match ? "" : "none";
+            if (match) shown++;
+          });
+          empty.hidden = shown > 0;
+          buttons.forEach(function (button) {
+            button.classList.toggle("active", button.dataset.category === category);
+          });
+
+          // Keep the filter in the URL so it can be shared
+          var query = new URLSearchParams();
+          if (category) query.set("category", category);
+          if (input.value.trim()) query.set("q", input.value.trim());
+          var search = query.toString();
+          window.history.replaceState(null, "", window.location.pathname + (search ? "?" + search : ""));
+        }
+
+        buttons.forEach(function (button) {
+          button.addEventListener("click", function () {
+            category = this.dataset.category;
+            apply();
+          });
+        });
+        input.addEventListener("input", apply);
+        apply();
+      })();
+    </script>
+  </body>
+</html>
+
+<!-- News Layout End -->
