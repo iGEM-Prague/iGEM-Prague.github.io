@@ -1,5 +1,5 @@
 # Interface texts in both languages, used by the templates via {% include t.html v=site.data.i18n.KEY %}
-recent_project: { en: "Recent project", cs: "Aktuální projekt" }
+recent_project: { en: "CrocoVoyage", cs: "CrocoVoyage" }
 all_news: { en: "All news", cs: "Všechny novinky" }
 all_news_from: { en: "All news from", cs: "Všechny novinky z roku" }
 meet_team: { en: "Meet the team", cs: "Poznejte náš tým" }
