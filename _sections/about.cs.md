@@ -6,4 +6,4 @@ title: O nás
 
 TODO
 
-Na t=eto stránce se ještě pracuje... Sledujte nás :D
+Na této stránce se ještě pracuje... Sledujte nás :D
