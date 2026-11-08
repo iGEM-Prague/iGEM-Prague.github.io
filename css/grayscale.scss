@@ -171,13 +171,17 @@ a {
   text-transform: uppercase;
   background-color: var(--primary-color);
   overflow-y: auto;
-  // --nav-stretch: extra height while the page is pulled down at the top (js.html),
-  // split above and below so the contents stay vertically centered
-  padding-top: calc(0.5rem + var(--nav-stretch, 0px) / 2);
-  padding-bottom: calc(0.5rem + var(--nav-stretch, 0px) / 2);
+  // --nav-stretch / --nav-stretch-bottom: extra height while the page is pulled past
+  // its top / bottom (js.html), split above and below so the contents stay centered
+  padding-top: calc(0.5rem + (var(--nav-stretch, 0px) + var(--nav-stretch-bottom, 0px)) / 2);
+  padding-bottom: calc(0.5rem + (var(--nav-stretch, 0px) + var(--nav-stretch-bottom, 0px)) / 2);
   @media (min-width: 768px) {
     // --nav-shrink (0 at the top, 1 when scrolled down) makes it compact gradually (js.html)
-    padding: calc(1.25rem * (1 - var(--nav-shrink, 0)) + var(--nav-stretch, 0px) / 2) 0;
+    padding: calc(
+        1.25rem * (1 - var(--nav-shrink, 0)) +
+          (var(--nav-stretch, 0px) + var(--nav-stretch-bottom, 0px)) / 2
+      )
+      0;
     letter-spacing: 1px;
   }
   .navbar-toggler {
