@@ -1,0 +1,42 @@
+# Files not needed in the container (it only needs the Gemfiles and the Jekyll sources)
+
+# Git and CI
+.git
+.gitignore
+.github
+
+# Docker setup itself
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Build output and caches (regenerated in the container)
+_site
+.jekyll-cache
+.jekyll-metadata
+.sass-cache
+.bundle
+vendor
+
+# Docs and notes (also excluded from the site in _config.yml)
+README.md
+TODO.md
+LICENSE
+
+# Ruby version for CI / local Ruby; the image brings its own
+.ruby-version
+
+# Editor, OS and Claude Code files (incl. empty placeholders left by Claude Code's sandbox)
+.claude
+.idea
+.vscode
+.mcp.json
+.bash_profile
+.bashrc
+.gitconfig
+.gitmodules
+.profile
+.ripgreprc
+.zprofile
+.zshrc
+**/.DS_Store
