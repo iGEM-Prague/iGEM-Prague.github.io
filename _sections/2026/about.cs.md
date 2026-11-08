@@ -2,7 +2,7 @@
 title: O projektu
 ---
 
-## Tým iGEM Prague, projekt CrocoVoyage
+## Projekt CrocoVoyage
 
 Pokud chceme být schopni realizovat dlouhodobé výzkumné mise ve vesmíru, musíme zajistit, aby posádka nebyla závislá na zásobování ze Země. Biologické systémy založené na sinicích by mohly využívat světlo a oxid uhličitý k růstu a v budoucnu přispívat k produkci biomasy, kyslíku či dalších užitečných látek. 
 

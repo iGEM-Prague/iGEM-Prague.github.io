@@ -2,7 +2,7 @@
 title: About project
 ---
 
-## iGEM Prague Team, CrocoVoyage project pitch
+## CrocoVoyage project
 
 If we are to carry out long-term research missions in space, we need to ensure that crews are not dependent on supplies from Earth. Biological systems based on cyanobacteria could use light and carbon dioxide to grow and, in the future, contribute to the production of biomass, oxygen, and other useful substances. 
 
