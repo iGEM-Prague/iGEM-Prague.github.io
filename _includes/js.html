@@ -14,17 +14,19 @@ To use this Jekyll theme, visit: https://github.com/le4ker/personal-jekyll-theme
 -->
 
 <script>
-  // Toggle navbar background on scroll
+  // Navbar gets compact while scrolling down (tablet and wider): --nav-shrink goes
+  // from 0 at the top to 1 after scrolling by the padding it loses, so its bottom
+  // edge moves up together with the page content
   function toggleNavCollapse() {
-    const navbar = document.querySelector(".navbar");
-    const fixedTop = document.querySelector(".fixed-top");
-    if (navbar && fixedTop) {
-      if (navbar.getBoundingClientRect().top + window.scrollY > 50) {
-        fixedTop.classList.add("top-nav-collapse");
-      } else {
-        fixedTop.classList.remove("top-nav-collapse");
-      }
+    const root = document.documentElement;
+    if (window.innerWidth < 768) {
+      root.style.removeProperty("--nav-shrink");
+      return;
     }
+    const shrinkDistance = 2 * 1.25 * parseFloat(getComputedStyle(root).fontSize);
+    const progress = Math.min(Math.max(window.scrollY, 0) / shrinkDistance, 1);
+    root.style.setProperty("--nav-shrink", progress.toFixed(3));
+    if (progress === 0) setNavbarHeight();
   }
 
   // Header image starts below the navbar: measure its full (not collapsed) height
@@ -32,7 +34,7 @@ To use this Jekyll theme, visit: https://github.com/le4ker/personal-jekyll-theme
     const navbar = document.querySelector(".navbar");
     const stretched =
       parseFloat(document.documentElement.style.getPropertyValue("--nav-stretch")) > 0;
-    if (navbar && !navbar.classList.contains("top-nav-collapse") && !stretched) {
+    if (navbar && window.scrollY <= 0 && !stretched) {
       document.documentElement.style.setProperty(
         "--navbar-height",
         navbar.offsetHeight + "px",
@@ -130,6 +132,7 @@ To use this Jekyll theme, visit: https://github.com/le4ker/personal-jekyll-theme
   })();
   document.addEventListener("DOMContentLoaded", toggleNavCollapse);
   window.addEventListener("scroll", toggleNavCollapse);
+  window.addEventListener("resize", toggleNavCollapse);
 
   // Smooth scrolling for page-scroll links
   document.addEventListener("DOMContentLoaded", function () {

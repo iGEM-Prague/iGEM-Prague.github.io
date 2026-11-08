@@ -176,15 +176,9 @@ a {
   padding-top: calc(0.5rem + var(--nav-stretch, 0px) / 2);
   padding-bottom: calc(0.5rem + var(--nav-stretch, 0px) / 2);
   @media (min-width: 768px) {
-    padding: calc(1.25rem + var(--nav-stretch, 0px) / 2) 0;
+    // --nav-shrink (0 at the top, 1 when scrolled down) makes it compact gradually (js.html)
+    padding: calc(1.25rem * (1 - var(--nav-shrink, 0)) + var(--nav-stretch, 0px) / 2) 0;
     letter-spacing: 1px;
-    // Compact while scrolled down; full size immediately at the top (no animation,
-    // so it always touches the header image)
-    &.top-nav-collapse {
-      padding: 0;
-      background: var(--primary-color);
-      border-bottom: 0.0625rem solid var(--font-color-faint-3);
-    }
   }
   .navbar-toggler {
     padding: 0.25rem 0.375rem;
