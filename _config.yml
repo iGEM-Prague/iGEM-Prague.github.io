@@ -94,14 +94,22 @@ collections:
   sections:
     output: false
 
-# News posts (_posts/<year>/YYYY-MM-DD-title.md) end up at /<year>/news/MM/DD/title/
+# News posts: _posts/<year>/en/YYYY-MM-DD-title.md end up at /<year>/news/MM/DD/title/,
+# Czech ones in _posts/<year>/cs/ at /<year>/news/MM/DD/title/cs/. Same file name = translations.
 defaults:
   - scope:
       path: ""
       type: "posts"
     values:
       layout: "post"
+      lang: "en"
       permalink: "/:year/news/:month/:day/:title/"
+  - scope:
+      path: "_posts/*/cs"
+      type: "posts"
+    values:
+      lang: "cs"
+      permalink: "/:year/news/:month/:day/:title/cs/"
 
 # Exclusion list from the generated _site
 exclude:
@@ -115,5 +123,3 @@ exclude:
 sass:
   style: compressed
 
-plugins:
-  - jekyll-spaceship

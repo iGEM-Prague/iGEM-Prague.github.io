@@ -59,13 +59,6 @@ h3 {
 
 h4 {
   font-size: 1.5rem;
-  a.category {
-    color: inherit;
-  }
-
-  a.tag {
-    font-size: 1rem;
-  }
 }
 
 h5 {
@@ -213,9 +206,6 @@ a {
   background-size: cover;
   -o-background-size: cover;
   .intro-body {
-    .brand-heading {
-      font-size: 2.5rem;
-    }
     .intro-text {
       font-size: 1.3rem;
     }
@@ -231,47 +221,10 @@ a {
   }
   @media (min-width: 768px) {
     .intro-body {
-      .brand-heading {
-        font-size: 6.25rem;
-      }
       .intro-text {
         font-size: 1.6rem;
       }
     }
-  }
-}
-
-@-webkit-keyframes pulse {
-  from {
-    -webkit-transform: scale(1);
-    transform: scale(1);
-  }
-
-  50% {
-    -webkit-transform: scale(1.2);
-    transform: scale(1.2);
-  }
-
-  100% {
-    -webkit-transform: scale(1);
-    transform: scale(1);
-  }
-}
-
-@-moz-keyframes pulse {
-  from {
-    -moz-transform: scale(1);
-    transform: scale(1);
-  }
-
-  50% {
-    -moz-transform: scale(1.2);
-    transform: scale(1.2);
-  }
-
-  100% {
-    -moz-transform: scale(1);
-    transform: scale(1);
   }
 }
 
@@ -312,11 +265,6 @@ a {
       -webkit-hyphens: none;
     }
   }
-  img.emoji {
-    margin: 0 !important;
-    display: inline !important;
-  }
-
   blockquote {
     border-left: 0.25rem solid var(--secondary-color);
     margin: 1.5rem 0;
@@ -422,7 +370,7 @@ ul.social-buttons li a {
   display: block;
   text-align: justify;
   margin-bottom: 1.92rem;
-  border-bottom: 1px dashed var(--font-color-faint-2);
+  border-bottom: 1px dashed var(--line-color);
   padding-bottom: 1.92rem;
   max-width: 65ch;
 }
@@ -459,17 +407,31 @@ ul.social-buttons li a {
 }
 
 footer {
-  padding: 3.11rem 0;
+  padding: 3.11rem 0 1rem;
   text-align: center;
-  .container {
-    margin: 1.5rem auto;
-    padding: 1rem 1.25rem;
+  // Copyright under a dashed line, like the lines between news posts
+  .footer-copyright {
+    max-width: 65ch;
+    margin: 0.5rem auto 0;
+    padding: 1rem 1.25rem 0;
+    border-top: 1px dashed var(--line-color);
   }
   p {
-    margin: 1.5rem auto;
-    padding: 1rem 1.25rem;
+    margin: 0 auto;
+    padding: 0;
     text-align: center;
   }
+}
+
+// Horizontal lines (between news posts, above the footer copyright, <hr>)
+:root {
+  --line-color: color-mix(in srgb, var(--font-color) 45%, transparent);
+}
+
+hr {
+  border: 0;
+  border-top: 1px dashed var(--line-color);
+  opacity: 1;
 }
 
 ::-moz-selection {
@@ -555,7 +517,7 @@ body {
   top: 3rem;
   bottom: 1rem;
   width: 0.4375rem;
-  left: 2.31rem;
+  left: calc(var(--timeline-img) / 2 - 0.21875rem);
   background-color: var(--background-color);
 }
 
@@ -577,7 +539,7 @@ body {
 
 // Each entry is a row: the text block and the circle are both centered vertically
 .timeline {
-  --timeline-img: 5.02rem;
+  --timeline-img: 7.53rem;
 }
 
 .timeline > li {
@@ -594,7 +556,7 @@ body {
   float: right;
   position: relative;
   width: 100%;
-  padding: 0 1.25rem 0 6.25rem;
+  padding: 0 1.25rem 0 calc(var(--timeline-img) + 1.25rem);
   text-align: left;
 }
 
@@ -643,7 +605,7 @@ body {
 
 .timeline > li.timeline-inverted > .timeline-panel {
   float: right;
-  padding: 0 1.25rem 0 6.25rem;
+  padding: 0 1.25rem 0 calc(var(--timeline-img) + 1.25rem);
   text-align: left;
 }
 
@@ -704,7 +666,7 @@ body {
 @media (min-width: 768px) {
   // Circle size; the text panels end 1.5rem from the circle
   .timeline {
-    --timeline-img: 6.25rem;
+    --timeline-img: 9.375rem;
   }
 
   .timeline:before {
@@ -715,7 +677,7 @@ body {
 
   .timeline > li {
     margin-bottom: 6.25rem;
-    min-height: 6.25rem;
+    min-height: var(--timeline-img);
   }
 
   .timeline > li .timeline-panel {
@@ -755,13 +717,13 @@ body {
 
 @media (min-width: 992px) {
   .timeline {
-    --timeline-img: 9.375rem;
+    --timeline-img: 14.0625rem;
   }
   .timeline:before {
     width: 0.4375rem;
   }
   .timeline > li {
-    min-height: 9.375rem;
+    min-height: var(--timeline-img);
   }
 
   .timeline > li .timeline-image h4 {
@@ -773,11 +735,11 @@ body {
 
 @media (min-width: 1200px) {
   .timeline > li {
-    min-height: 10.625rem;
+    min-height: var(--timeline-img);
   }
 
   .timeline {
-    --timeline-img: 9.75rem;
+    --timeline-img: 14.625rem;
   }
 
   .timeline > li .timeline-image h4 {
@@ -807,15 +769,6 @@ body {
   code {
     text-decoration: none;
   }
-}
-
-// Mermaid diagrams are pre-rendered by mermaid.ink as SVGs with transparent
-// backgrounds and dark lines. In dark mode, give them a light island so the
-// diagram remains legible without changing the upstream SVG.
-[data-theme="dark"] img.mermaid {
-  background-color: #fdf6e3;
-  padding: 0.75rem 1.25rem;
-  border-radius: 0.3125rem;
 }
 
 // Theme toggle button
@@ -902,4 +855,23 @@ body {
 
 .member-bio {
   font-size: 0.95em;
+}
+
+// Language switch: show only the texts of the current language (html[data-lang] is set in
+// head.html; English when it is not set)
+html[data-lang="cs"] [data-l="en"],
+html:not([data-lang="cs"]) [data-l="cs"] {
+  display: none !important;
+}
+
+.lang-toggle {
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+// "(in Czech)" mark of a post that exists only in the other language
+.post-lang {
+  margin-left: 0.5rem;
+  color: var(--font-color-light);
 }

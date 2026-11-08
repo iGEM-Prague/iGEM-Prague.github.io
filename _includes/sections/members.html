@@ -1,11 +1,11 @@
 <!-- Members Start: intro + link to the Members page -->
 
-<section id="{{ section.slug }}" class="container content-section text-center">
+<section id="{{ slug }}" class="container content-section text-center">
   <div class="row justify-content-center">
     <div class="col-md-10 col-12">
-      {{ section.content | markdownify }}
+      {% include section-text.html %}
 
-      <a class="btn btn-default btn-lg mt-4" href="{{ sec_base | append: 'members/' | relative_url }}">Meet the team</a>
+      <a class="btn btn-default btn-lg mt-4" href="{{ sec_base | append: 'members/' | relative_url }}">{% include t.html v=site.data.i18n.meet_team %}</a>
     </div>
   </div>
 </section>

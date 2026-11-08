@@ -1,0 +1,16 @@
+# Interface texts in both languages, used by the templates via {% include t.html v=site.data.i18n.KEY %}
+recent_project: { en: "Recent project", cs: "Aktuální projekt" }
+all_news: { en: "All news", cs: "Všechny novinky" }
+all_news_from: { en: "All news from", cs: "Všechny novinky z roku" }
+meet_team: { en: "Meet the team", cs: "Poznejte náš tým" }
+no_news: { en: "No news yet.", cs: "Zatím žádné novinky." }
+no_match: { en: "No news match your search.", cs: "Hledání neodpovídají žádné novinky." }
+search_news: { en: "Search news…", cs: "Hledat v novinkách…" }
+all_categories: { en: "All", cs: "Vše" }
+# Marks a post that exists only in the other language
+only_cs: { en: "in Czech" }
+only_en: { cs: "anglicky" }
+# Link on a post to its translation, in the language of the translation
+read_in_en: "Read in English"
+read_in_cs: "Číst česky"
+switch_language: "Switch language / Přepnout jazyk"

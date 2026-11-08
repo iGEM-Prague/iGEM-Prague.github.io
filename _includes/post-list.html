@@ -1,12 +1,19 @@
 <!-- Post List Start -->
 {%- assign post_year = post.date | date: "%Y" -%}
 {%- assign news_url = "/" | append: post_year | append: "/news/" | relative_url -%}
+{%- include find-translation.html post=post -%}
 {%- capture post_search -%}
   {{ post.title }} {{ post.categories | join: " " }} {{ post.content | strip_html }}
 {%- endcapture %}
 
+{% comment %}
+  A post with a translation is shown only in its language (data-l);
+  a post without one is shown in both, marked with its language.
+{% endcomment %}
 <div
   class="post-list-item"
+  {% if translation %}data-l="{{ post.lang }}"{% endif %}
+  lang="{{ post.lang }}"
   data-categories="{{ post.categories | join: '|' | downcase | escape }}"
   data-search="{{ post_search | strip_newlines | downcase | escape }}"
 >
@@ -19,6 +26,13 @@
   <span class="post-title">
     <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
   </span>
+  {% unless translation %}
+    {% if post.lang == "cs" %}
+    <small class="post-lang" data-l="en">({{ site.data.i18n.only_cs.en }})</small>
+    {% else %}
+    <small class="post-lang" data-l="cs">({{ site.data.i18n.only_en.cs }})</small>
+    {% endif %}
+  {% endunless %}
   {% if include.preview %}
   <p class="post-preview">{{ post.content | strip_html | truncatewords: site.post-preview-words }}</p>
   {% endif %}

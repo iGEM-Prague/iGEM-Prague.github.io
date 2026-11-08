@@ -17,6 +17,18 @@
       try {
         var t = localStorage.getItem("theme") || "light";
         document.documentElement.setAttribute("data-theme", t);
+        // Language: stored choice, English by default. CSS shows only [data-l] of this language.
+        var l = localStorage.getItem("lang") || "en";
+        document.documentElement.setAttribute("data-lang", l);
+        document.documentElement.lang = l;
+        {%- if page.layout == "post" %}
+        {%- include find-translation.html post=page %}
+        {%- if translation %}
+        // This post exists in both languages: open the version in the chosen language
+        window.pageTranslations = { "{{ translation.lang }}": "{{ translation.url | relative_url }}" };
+        if (l !== "{{ page.lang }}") window.location.replace(window.pageTranslations[l]);
+        {%- endif %}
+        {%- endif %}
       } catch (e) {}
     })();
   </script>

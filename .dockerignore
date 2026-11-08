@@ -23,9 +23,6 @@ README.md
 TODO.md
 LICENSE
 
-# Ruby version for CI / local Ruby; the image brings its own
-.ruby-version
-
 # Editor, OS and Claude Code files (incl. empty placeholders left by Claude Code's sandbox)
 .claude
 .idea

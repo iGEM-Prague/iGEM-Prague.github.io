@@ -1,5 +1,6 @@
 <!-- Post Layout Start -->
 {%- assign post_year = page.date | date: "%Y" -%}
+{%- include find-translation.html post=page -%}
 
 <!doctype html>
 <html lang="{{site.lang}}">
@@ -23,11 +24,19 @@
             {% endfor %}
           </h6>
 
-          <section class="text-justify pt-5">
+          {% if translation %}
+          <p class="text-center pt-3">
+            <a href="{{ translation.url | relative_url }}" lang="{{ translation.lang }}" class="post-translation">
+              {% if translation.lang == "cs" %}{{ site.data.i18n.read_in_cs }}{% else %}{{ site.data.i18n.read_in_en }}{% endif %}
+            </a>
+          </p>
+          {% endif %}
+
+          <section class="text-justify pt-5" lang="{{ page.lang }}">
             {{ page.content | markdownify }}
           </section>
 
-          <p class="text-center pt-4"><a href="{{ news_url }}">&larr; All news from {{ post_year }}</a></p>
+          <p class="text-center pt-4"><a href="{{ news_url }}">&larr; {% include t.html v=site.data.i18n.all_news_from %} {{ post_year }}</a></p>
 
           {% include share.html %}
 
@@ -43,7 +52,7 @@
               />
             </div>
             <div class="col-8 col-sm-9 col-md-10 blurb">
-              <p>{{ site.author_blurb }}</p>
+              <p>{% include t.html v=site.author_blurb %}</p>
             </div>
           </div>
           {% endif %}

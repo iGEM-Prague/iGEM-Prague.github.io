@@ -36,41 +36,65 @@ The page will be live on `https://igem-prague.github.io/`.
 | `/2026/`                         | About project, News (latest 3 posts), Members   |
 | `/2026/news/`                    | All news of 2026, with search and category filter |
 | `/2026/members/`                 | Team members of 2026                            |
-| `/2026/news/MM/DD/title/`        | A single news post                              |
+| `/2026/news/MM/DD/title/`        | A single news post (Czech version: `.../title/cs/`) |
 
 Texts of the pages live in `_sections/` (main page) and `_sections/2026/` (2026 page).
-Each file there is one section of the page; the heading and text below the
-front matter (the part between `---` lines) is what gets shown.
+
+## Two languages (English and Czech)
+
+Every page contains both languages; the **CZ / EN** button in the navigation bar
+switches between them instantly (like the dark mode button) and the choice is remembered.
+English is the default. When a Czech text is missing, the English one is shown instead
+(and the other way round), so a page never ends up empty.
+
+Texts are written like this:
+
+- **Longer texts**: two Markdown files side by side, `NAME.en.md` and `NAME.cs.md`, e.g.
+  `_sections/about.en.md` and `_sections/about.cs.md`. The `title:` in their front matter
+  (the part between `---` lines) is the section's name in the navigation bar; the text
+  below it is shown on the page.
+- **Short texts in front matter** (timeline descriptions, member roles and bios, header
+  phrases): either one text for both languages, or an `en` / `cs` pair:
+
+  ```yaml
+  description:
+    en: "Genetically engineering cyanobacteria to enhance space travel."
+    cs: "Genetické inženýrství sinic pro podporu vesmírných cest."
+  ```
+- **Things that are not text** (order of sections, timeline entries, member list) are in
+  one file without a language suffix: `index.md`, `timeline.md`, `members.md`.
+- **Texts of buttons and labels** ("All news", "Meet the team", ...) are in `_data/i18n.yml`.
 
 ## Editing the main page
 
 | What                       | Where                                                         |
 | -------------------------- | ------------------------------------------------------------- |
-| About us                   | `_sections/about.md`                                          |
-| Timeline heading, entries  | `_sections/timeline.md`                                       |
+| About us                   | `_sections/about.en.md`, `_sections/about.cs.md`              |
+| Timeline heading           | `_sections/timeline.en.md`, `_sections/timeline.cs.md`        |
+| Timeline entries           | `events:` in `_sections/timeline.md`                          |
 | "Recent project" nav link  | first timeline entry (automatically)                          |
-| Contact text               | `_sections/contact.md`                                        |
+| Contact text               | `_sections/contact.en.md`, `_sections/contact.cs.md`          |
 | Contact email              | `email:` in `_config.yml`                                     |
 | Instagram / GitHub icons   | `social:` in `_config.yml`                                    |
-| Text typed in the header   | `header-text:` in `_sections/index.md` (a list: one phrase is picked at random) |
+| Text typed in the header   | `header-text:` in `_sections/index.md` (`en` / `cs` lists, one phrase is picked at random) |
 | Order of sections          | `sections:` in `_sections/index.md`                           |
 | Header background, logo    | `background-img:`, `me-img:` in `_config.yml` (files in `img/`) |
 
-The `title:` in the front matter of each section is its name in the navigation bar.
-
 ### Timeline entries
 
-`events:` in the front matter of `_sections/timeline.md` lists one entry per year, newest first:
+`events:` in `_sections/timeline.md` lists one entry per year, newest first:
 
 ```yaml
 - date: "2026"
   title: "CrocoVoyage"
-  description: "One or two sentences about the project."
+  description:
+    en: "One or two sentences about the project."
+    cs: "Jedna nebo dvě věty o projektu."
   image: "/img/team-logo.webp"
   link: "/2026/"                                # page of this site...
 - date: "2025"
   title: "..."
-  description: "..."
+  description: { en: "...", cs: "..." }
   image: "/img/team-logo.webp"
   link: "https://2025.igem.wiki/bohemiabio/"    # ...or an external URL
 ```
@@ -79,14 +103,14 @@ External links open in a new tab.
 
 ## Editing the 2026 page
 
-| What                            | Where                                     |
-| ------------------------------- | ----------------------------------------- |
-| About project                   | `_sections/2026/about.md`                 |
-| News intro text                 | `_sections/2026/news.md`                  |
-| Members intro text              | `_sections/2026/members.md`               |
-| Team members                    | `members:` in `_sections/2026/members.md` |
-| Text typed in the header        | `header-text:` in `_sections/2026/index.md` (one phrase or a list) |
-| Order of sections               | `sections:` in `_sections/2026/index.md`  |
+| What                            | Where                                                      |
+| ------------------------------- | ---------------------------------------------------------- |
+| About project                   | `_sections/2026/about.en.md`, `about.cs.md`                |
+| News intro text                 | `_sections/2026/news.en.md`, `news.cs.md`                  |
+| Members intro text              | `_sections/2026/members.en.md`, `members.cs.md`            |
+| Team members                    | `members:` in `_sections/2026/members.md`                  |
+| Text typed in the header        | `header-text:` in `_sections/2026/index.md` (one phrase, a list, or `en` / `cs` lists) |
+| Order of sections               | `sections:` in `_sections/2026/index.md`                   |
 
 The intro texts of News and Members are shown both on the 2026 page and
 above the list of all news / members.
@@ -98,9 +122,11 @@ Add an entry to `members:` in `_sections/2026/members.md`:
 ```yaml
 members:
   - name: "Jana Nováková"
-    role: "Wet lab"
+    role: { en: "Wet lab", cs: "Laboratoř" }
     photo: "/img/2026/members/jana.webp"
-    bio: "A few sentences about Jana."
+    bio:
+      en: "A few sentences about Jana."
+      cs: "Pár vět o Janě."
 ```
 
 Put the photo to `img/2026/members/`. It is shown as a circle, so use a square
@@ -109,8 +135,11 @@ Without a `photo`, the team logo is shown instead.
 
 ## Adding news posts
 
-1. Create a file in `_posts/2026/` named `YYYY-MM-DD-title.md`, e.g.
-   `_posts/2026/2026-11-05-first-transformation.md`. The date in the name is the
+A post is written in one language; English posts go to `_posts/2026/en/`, Czech ones
+to `_posts/2026/cs/`.
+
+1. Create a file named `YYYY-MM-DD-title.md`, e.g.
+   `_posts/2026/en/2026-11-05-first-transformation.md`. The date in the name is the
    publishing date; the rest becomes the URL (use lowercase letters, numbers and `-`).
 2. Start it with front matter, then write the post in Markdown:
 
@@ -131,12 +160,25 @@ Without a `photo`, the team logo is shown instead.
 The post's year (from its `date`) decides which year page it appears on.
 The newest 3 posts are shown on the 2026 page, all of them on `/2026/news/`.
 
+### Translating a post
+
+To publish a post in both languages, give the translation **the same file name** in the
+other folder, e.g. `_posts/2026/en/2026-11-05-first-transformation.md` and
+`_posts/2026/cs/2026-11-05-first-transformation.md`. They are linked automatically:
+
+- the news lists show each reader only the version in their language,
+- the CZ / EN button on the post opens the other version, and a link at the top of
+  the post leads there too,
+- opening a post in the other language than the chosen one shows the chosen version.
+
+A post without a translation is listed in both languages, marked "(in Czech)" or "(anglicky)".
+
 ### Categories
 
 Write any categories in `categories: [labwork, outreach]` (or a single
 `category: labwork`). Nothing else needs to be created: the filter buttons on
 the News page are generated from the categories used in that year's posts.
-Use the same spelling each time, otherwise you get two buttons.
+Use the same spelling each time (also in both language versions), otherwise you get two buttons.
 
 ### Search
 
@@ -150,7 +192,7 @@ Filtered views can be shared, e.g. `/2026/news/?category=labwork&q=plasmid`.
    `members:` list and change `header-text:`.
 2. Copy the folder `2026/` (page files) to `2027/` and in each of its three files
    replace `2026` by `2027` (`sections-dir`, `year`, `title`, `permalink`).
-3. Put the year's posts to `_posts/2027/` and images to `img/2027/`.
+3. Put the year's posts to `_posts/2027/en/` and `_posts/2027/cs/`, images to `img/2027/`.
 4. Add the year to the top of `events:` in `_sections/timeline.md` with `link: "/2027/"`.
 
 Old years keep working unchanged.

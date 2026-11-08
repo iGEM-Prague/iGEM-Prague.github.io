@@ -1,0 +1,28 @@
+{%- comment -%}
+  Prints a text in both languages; the language switch shows one of them.
+  {% include t.html v=VALUE %}      VALUE is a plain string, or a map {en: ..., cs: ...}
+  {% include t.html en=A cs=B %}    the two versions given separately
+  Add md=true to render Markdown (block elements). A missing version falls back to the other one.
+{%- endcomment -%}
+{%- if include.v -%}
+  {%- assign t_first = include.v | jsonify | slice: 0 -%}
+  {%- if t_first == "{" -%}
+    {%- assign t_en = include.v.en -%}
+    {%- assign t_cs = include.v.cs -%}
+  {%- else -%}
+    {%- assign t_en = include.v -%}
+    {%- assign t_cs = include.v -%}
+  {%- endif -%}
+{%- else -%}
+  {%- assign t_en = include.en -%}
+  {%- assign t_cs = include.cs -%}
+{%- endif -%}
+{%- assign t_en2 = t_en | default: t_cs -%}
+{%- assign t_cs2 = t_cs | default: t_en -%}
+{%- if t_en2 == t_cs2 -%}
+  {%- if include.md -%}{{ t_en2 | markdownify }}{%- else -%}{{ t_en2 }}{%- endif -%}
+{%- elsif include.md -%}
+<div data-l="en" lang="en">{{ t_en2 | markdownify }}</div><div data-l="cs" lang="cs">{{ t_cs2 | markdownify }}</div>
+{%- else -%}
+<span data-l="en" lang="en">{{ t_en2 }}</span><span data-l="cs" lang="cs">{{ t_cs2 }}</span>
+{%- endif -%}

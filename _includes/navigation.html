@@ -26,13 +26,15 @@
         {% comment %} Links to the sections of the main page or of the year page this page belongs to {% endcomment %}
         {% include resolve-sections.html %}
         {% for slug in sec_index.sections %}
-          {% assign nav_path = sec_prefix | append: slug | append: ".md" %}
-          {% assign nav_section = site.sections | where: "relative_path", nav_path | first %}
+          {% assign nav_en_path = sec_prefix | append: slug | append: ".en.md" %}
+          {% assign nav_cs_path = sec_prefix | append: slug | append: ".cs.md" %}
+          {% assign nav_en = site.sections | where: "relative_path", nav_en_path | first %}
+          {% assign nav_cs = site.sections | where: "relative_path", nav_cs_path | first %}
           <li class="nav-item pe-2 ps-2">
             {% if page.layout == "sections" %}
-            <a class="nav-link page-scroll" href="#{{ slug }}">{{ nav_section.title }}</a>
+            <a class="nav-link page-scroll" href="#{{ slug }}">{% include t.html en=nav_en.title cs=nav_cs.title %}</a>
             {% else %}
-            <a class="nav-link" href="{{ sec_base | relative_url }}#{{ slug }}">{{ nav_section.title }}</a>
+            <a class="nav-link" href="{{ sec_base | relative_url }}#{{ slug }}">{% include t.html en=nav_en.title cs=nav_cs.title %}</a>
             {% endif %}
           </li>
         {% endfor %}
@@ -42,13 +44,22 @@
           {% assign recent_link = timeline_section.events.first.link %}
           <li class="nav-item pe-2 ps-2">
             {% if recent_link contains "://" %}
-            <a class="nav-link" href="{{ recent_link }}" target="_blank" rel="noopener">Recent project</a>
+            <a class="nav-link" href="{{ recent_link }}" target="_blank" rel="noopener">{% include t.html v=site.data.i18n.recent_project %}</a>
             {% else %}
-            <a class="nav-link" href="{{ recent_link | relative_url }}">Recent project</a>
+            <a class="nav-link" href="{{ recent_link | relative_url }}">{% include t.html v=site.data.i18n.recent_project %}</a>
             {% endif %}
           </li>
         {% endif %}
       </ul>
+      <button
+        class="theme-toggle lang-toggle ms-2"
+        id="lang-toggle"
+        type="button"
+        aria-label="{{ site.data.i18n.switch_language }}"
+        title="{{ site.data.i18n.switch_language }}"
+      >
+        <span data-l="en" lang="cs">CZ</span><span data-l="cs" lang="en">EN</span>
+      </button>
       <button
         class="theme-toggle ms-2"
         id="theme-toggle"

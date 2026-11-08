@@ -1,0 +1,5 @@
+{%- comment -%} Text of the current section (sec_en / sec_cs from section-docs.html) in both languages {%- endcomment -%}
+{%- assign st_en = sec_en | default: sec_cs -%}
+{%- assign st_cs = sec_cs | default: sec_en -%}
+<div data-l="en" lang="{% if sec_en %}en{% else %}cs{% endif %}">{{ st_en.content | markdownify }}</div>
+<div data-l="cs" lang="{% if sec_cs %}cs{% else %}en{% endif %}">{{ st_cs.content | markdownify }}</div>

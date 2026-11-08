@@ -1,13 +1,13 @@
 ---
-title: Members
-# One entry per team member. photo is optional (team logo is shown instead).
+# One entry per team member, shared by both languages (intro text: members.en.md / members.cs.md).
+# photo is optional (team logo is shown instead); role and bio have an en and a cs version.
 members:
   - name: "TODO Name"
-    role: "TODO role"
+    role:
+      en: "TODO role"
+      cs: "TODO role"
     photo: ""
-    bio: "TODO a few sentences about the member."
+    bio:
+      en: "TODO a few sentences about the member."
+      cs: "TODO pár vět o členovi."
 ---
-
-## Members
-
-TODO short intro about the team (shown on the 2026 page and on the Members page).

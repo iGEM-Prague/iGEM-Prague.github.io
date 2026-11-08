@@ -1,7 +1,6 @@
 <!-- Members Layout Start: member cards of one year -->
 {% include resolve-sections.html %}
-{%- assign section_path = sec_prefix | append: "members.md" -%}
-{%- assign section = site.sections | where: "relative_path", section_path | first -%}
+{%- include section-docs.html slug="members" -%}
 
 <!doctype html>
 <html lang="{{site.lang}}">
@@ -13,7 +12,7 @@
     <section id="members" class="container content-section text-center">
       <div class="row justify-content-center">
         <div class="col-md-10 col-12">
-          {{ section.content | markdownify }}
+          {% include section-text.html %}
         </div>
       </div>
 
@@ -27,8 +26,8 @@
             loading="lazy"
           />
           <h4 class="pt-3 mb-1">{{ member.name }}</h4>
-          <p class="member-role">{{ member.role }}</p>
-          <p class="member-bio">{{ member.bio }}</p>
+          <p class="member-role">{% include t.html v=member.role %}</p>
+          <p class="member-bio">{% include t.html v=member.bio %}</p>
         </div>
         {% endfor %}
       </div>

@@ -1,0 +1,12 @@
+{%- comment -%}
+  For section `include.slug` in the folder sec_prefix (see resolve-sections.html) sets:
+    sec_en, sec_cs  the <slug>.en.md / <slug>.cs.md texts (either may be missing)
+    section         the language-neutral <slug>.md with shared data (may be missing)
+{%- endcomment -%}
+{%- assign sd_base = sec_prefix | append: include.slug -%}
+{%- assign sd_en = sd_base | append: ".en.md" -%}
+{%- assign sd_cs = sd_base | append: ".cs.md" -%}
+{%- assign sd_data = sd_base | append: ".md" -%}
+{%- assign sec_en = site.sections | where: "relative_path", sd_en | first -%}
+{%- assign sec_cs = site.sections | where: "relative_path", sd_cs | first -%}
+{%- assign section = site.sections | where: "relative_path", sd_data | first -%}

@@ -1,7 +1,6 @@
 <!-- News Layout Start: all posts of one year, with search and category filter -->
 {% include resolve-sections.html %}
-{%- assign section_path = sec_prefix | append: "news.md" -%}
-{%- assign section = site.sections | where: "relative_path", section_path | first -%}
+{%- include section-docs.html slug="news" -%}
 
 {%- assign year_posts = "" | split: "" -%}
 {%- assign categories = "" | split: "" -%}
@@ -24,19 +23,21 @@
     <section id="news" class="container content-section text-center">
       <div class="row justify-content-center">
         <div class="col-md-10 col-12">
-          {{ section.content | markdownify }}
+          {% include section-text.html %}
 
           <div class="news-filter pt-3">
             <input
               type="search"
               id="news-search"
               class="form-control"
-              placeholder="Search news…"
-              aria-label="Search news"
+              placeholder="{{ site.data.i18n.search_news.en }}"
+              data-placeholder-en="{{ site.data.i18n.search_news.en }}"
+              data-placeholder-cs="{{ site.data.i18n.search_news.cs }}"
+              aria-label="{{ site.data.i18n.search_news.en }}"
             />
             {% if categories.size > 0 %}
             <div class="news-categories pt-3" role="group" aria-label="Filter by category">
-              <button type="button" class="btn btn-default category-filter" data-category="">All</button>
+              <button type="button" class="btn btn-default category-filter" data-category="">{% include t.html v=site.data.i18n.all_categories %}</button>
               {% for category in categories %}
               <button type="button" class="btn btn-default category-filter" data-category="{{ category | downcase | escape }}">{{ category }}</button>
               {% endfor %}
@@ -50,7 +51,7 @@
             {% endfor %}
           </div>
           <p id="news-empty" class="pt-4" hidden>
-            {% if year_posts.size > 0 %}No news match your search.{% else %}No news yet.{% endif %}
+            {% if year_posts.size > 0 %}{% include t.html v=site.data.i18n.no_match %}{% else %}{% include t.html v=site.data.i18n.no_news %}{% endif %}
           </p>
         </div>
       </div>
@@ -76,11 +77,15 @@
 
         function apply() {
           var words = normalize(input.value).split(/\s+/).filter(Boolean);
+          var lang = document.documentElement.getAttribute("data-lang") || "en";
+          input.placeholder = input.dataset["placeholder" + (lang === "cs" ? "Cs" : "En")];
           var shown = 0;
           items.forEach(function (item) {
             var categories = item.dataset.categories.split("|");
             var text = normalize(item.dataset.search);
+            // A post with a translation is listed only in its own language
             var match =
+              (!item.dataset.l || item.dataset.l === lang) &&
               (!category || categories.indexOf(category) !== -1) &&
               words.every(function (word) {
                 return text.indexOf(word) !== -1;
@@ -108,6 +113,7 @@
           });
         });
         input.addEventListener("input", apply);
+        document.addEventListener("langchange", apply);
         apply();
       })();
     </script>

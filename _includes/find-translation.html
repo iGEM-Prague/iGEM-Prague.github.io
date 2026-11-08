@@ -1,0 +1,12 @@
+{%- comment -%}
+  Sets `translation` to the other-language version of include.post: the post with the same
+  file name and date in the other language folder (_posts/<year>/en/ vs _posts/<year>/cs/), or nil.
+{%- endcomment -%}
+{%- assign translation = nil -%}
+{%- assign ft_date = include.post.date | date: "%F" -%}
+{%- for ft_post in site.posts -%}
+  {%- assign ft_post_date = ft_post.date | date: "%F" -%}
+  {%- if ft_post.slug == include.post.slug and ft_post_date == ft_date and ft_post.lang != include.post.lang -%}
+    {%- assign translation = ft_post -%}
+  {%- endif -%}
+{%- endfor -%}

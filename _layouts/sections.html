@@ -17,8 +17,7 @@
 
     {% include header.html %}
     {% for slug in sec_index.sections %}
-      {% assign section_path = sec_prefix | append: slug | append: ".md" %}
-      {% assign section = site.sections | where: "relative_path", section_path | first %}
+      {% include section-docs.html slug=slug %}
       {% include sections/{{ slug }}.html %}
     {% endfor %}
 
