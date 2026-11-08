@@ -4,4 +4,6 @@ title: About
 
 ## About Us
 
-TODO about us
+TODO
+
+This page is still under construction... Stay tuned :D

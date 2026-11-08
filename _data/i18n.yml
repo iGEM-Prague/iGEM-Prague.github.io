@@ -3,9 +3,9 @@ recent_project: { en: "Recent project", cs: "Aktuální projekt" }
 all_news: { en: "All news", cs: "Všechny novinky" }
 all_news_from: { en: "All news from", cs: "Všechny novinky z roku" }
 meet_team: { en: "Meet the team", cs: "Poznejte náš tým" }
-no_news: { en: "No news yet.", cs: "Zatím žádné novinky." }
-no_match: { en: "No news match your search.", cs: "Hledání neodpovídají žádné novinky." }
-search_news: { en: "Search news…", cs: "Hledat v novinkách…" }
+no_news: { en: "No posts were added yet.", cs: "Zatím nebyly zveřejněny žádné novinky." }
+no_match: { en: "No posts match your search.", cs: "Hledání neodpovídají žádné novinky." }
+search_news: { en: "Search all posts…", cs: "Hledat v novinkách…" }
 all_categories: { en: "All", cs: "Vše" }
 # Marks a post that exists only in the other language
 only_cs: { en: "in Czech" }

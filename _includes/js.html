@@ -33,7 +33,9 @@ To use this Jekyll theme, visit: https://github.com/le4ker/personal-jekyll-theme
   // Header image starts below the navbar: measure its full (not collapsed) height
   function setNavbarHeight() {
     const navbar = document.querySelector(".navbar");
-    if (navbar && !navbar.classList.contains("top-nav-collapse")) {
+    const stretched =
+      parseFloat(document.documentElement.style.getPropertyValue("--nav-stretch")) > 0;
+    if (navbar && !navbar.classList.contains("top-nav-collapse") && !stretched) {
       document.documentElement.style.setProperty(
         "--navbar-height",
         navbar.offsetHeight + "px",
@@ -42,6 +44,95 @@ To use this Jekyll theme, visit: https://github.com/le4ker/personal-jekyll-theme
   }
   document.addEventListener("DOMContentLoaded", setNavbarHeight);
   window.addEventListener("resize", setNavbarHeight);
+
+  // Pulling the page down at the top stretches the navbar (and pushes the page down
+  // with it), then it springs back with a small bounce
+  (function () {
+    const navbar = document.querySelector(".navbar");
+    if (!navbar || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const root = document.documentElement;
+    const MAX = 120; // px
+    let stretch = 0;
+    let releaseTimer = null;
+    let animation = null;
+    let touchStartY = null;
+
+    function setStretch(px) {
+      stretch = Math.max(0, Math.min(px, MAX));
+      root.style.setProperty("--nav-stretch", stretch + "px");
+    }
+
+    function pull(amount) {
+      if (animation) cancelAnimationFrame(animation);
+      animation = null;
+      navbar.classList.add("nav-stretching");
+      // The further it is pulled, the heavier it gets
+      setStretch(stretch + amount * (1 - stretch / MAX));
+    }
+
+    // Bounce back: fall to 0, then two small hops
+    function easeOutBounce(t) {
+      const n = 7.5625, d = 2.75;
+      if (t < 1 / d) return n * t * t;
+      if (t < 2 / d) return n * (t -= 1.5 / d) * t + 0.75;
+      if (t < 2.5 / d) return n * (t -= 2.25 / d) * t + 0.9375;
+      return n * (t -= 2.625 / d) * t + 0.984375;
+    }
+
+    function release() {
+      if (stretch <= 0) return;
+      const from = stretch;
+      const start = performance.now();
+      const duration = 700;
+      function frame(now) {
+        const t = Math.min((now - start) / duration, 1);
+        setStretch(from * (1 - easeOutBounce(t)));
+        if (t < 1) {
+          animation = requestAnimationFrame(frame);
+        } else {
+          animation = null;
+          navbar.classList.remove("nav-stretching");
+          root.style.removeProperty("--nav-stretch");
+        }
+      }
+      animation = requestAnimationFrame(frame);
+    }
+
+    // Mouse wheel / touchpad
+    window.addEventListener(
+      "wheel",
+      function (e) {
+        if (window.scrollY > 0 || e.deltaY >= 0) return;
+        pull(-e.deltaY * 0.4);
+        clearTimeout(releaseTimer);
+        releaseTimer = setTimeout(release, 150);
+      },
+      { passive: true },
+    );
+
+    // Touch screens
+    window.addEventListener(
+      "touchstart",
+      function (e) {
+        touchStartY = window.scrollY <= 0 ? e.touches[0].clientY : null;
+      },
+      { passive: true },
+    );
+    window.addEventListener(
+      "touchmove",
+      function (e) {
+        if (touchStartY === null || window.scrollY > 0) return;
+        const dy = e.touches[0].clientY - touchStartY;
+        touchStartY = e.touches[0].clientY;
+        if (dy > 0 || stretch > 0) pull(dy * 0.5);
+      },
+      { passive: true },
+    );
+    window.addEventListener("touchend", function () {
+      touchStartY = null;
+      release();
+    });
+  })();
   document.addEventListener("DOMContentLoaded", toggleNavCollapse);
   window.addEventListener("scroll", toggleNavCollapse);
 

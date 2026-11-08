@@ -1,7 +1,7 @@
 ---
-title: Members
+title: Team
 ---
 
-## Members
+## Team
 
-TODO short intro about the team (shown on the 2026 page and on the Members page).
+TODO

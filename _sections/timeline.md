@@ -8,7 +8,7 @@ events:
     title: "CrocoVoyage"
     description:
       en: "Genetically engineering cyanobacteria to enhance space travel."
-      cs: "Genetické inženýrství sinic pro podporu vesmírných cest."
+      cs: "Genetické inženýrství sinic pro vhodných pro vesmírné cestování."
     image: "/img/team-logo.webp"
     link: "/2026/"
 
@@ -16,7 +16,7 @@ events:
     title: "AleChemy"
     description:
       en: "Producing bitter taste in beer by genetically engineered yeast."
-      cs: "Výroba hořké chuti piva pomocí geneticky upravených kvasinek."
+      cs: "Zvyšování hořkosti piva pomocí geneticky upravených kvasinek."
     image: "https://static.igem.wiki/teams/5904/files/logo.webp"
     link: "https://2025.igem.wiki/bohemiabio/"
 ---
