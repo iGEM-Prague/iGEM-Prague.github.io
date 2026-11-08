@@ -115,6 +115,11 @@ External links open in a new tab.
 The intro texts of News and Members are shown both on the 2026 page and
 above the list of all news / members.
 
+In the navigation bar, News and Members open their separate pages (`/2026/news/`,
+`/2026/members/`) because of `nav-link:` in `news.en.md` / `members.en.md`. Any section
+can get one: a relative path is taken from the year's page (`news/` → `/2026/news/`),
+a full URL opens that site. Without `nav-link:` the navbar scrolls to the section.
+
 ### Adding a team member
 
 Add an entry to `members:` in `_sections/2026/members.md`:

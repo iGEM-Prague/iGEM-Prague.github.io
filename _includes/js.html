@@ -65,7 +65,6 @@ To use this Jekyll theme, visit: https://github.com/le4ker/personal-jekyll-theme
     function pull(amount) {
       if (animation) cancelAnimationFrame(animation);
       animation = null;
-      navbar.classList.add("nav-stretching");
       // The further it is pulled, the heavier it gets
       setStretch(stretch + amount * (1 - stretch / MAX));
     }
@@ -91,7 +90,6 @@ To use this Jekyll theme, visit: https://github.com/le4ker/personal-jekyll-theme
           animation = requestAnimationFrame(frame);
         } else {
           animation = null;
-          navbar.classList.remove("nav-stretching");
           root.style.removeProperty("--nav-stretch");
         }
       }

@@ -30,8 +30,17 @@
           {% assign nav_cs_path = sec_prefix | append: slug | append: ".cs.md" %}
           {% assign nav_en = site.sections | where: "relative_path", nav_en_path | first %}
           {% assign nav_cs = site.sections | where: "relative_path", nav_cs_path | first %}
+          {% comment %} nav-link: in the section file opens that page instead of scrolling to the section {% endcomment %}
+          {% assign nav_link = nav_en.nav-link | default: nav_cs.nav-link %}
           <li class="nav-item pe-2 ps-2">
-            {% if page.layout == "sections" %}
+            {% if nav_link %}
+              {% if nav_link contains "://" %}
+                {% assign nav_href = nav_link %}
+              {% else %}
+                {% assign nav_href = sec_base | append: nav_link | relative_url %}
+              {% endif %}
+            <a class="nav-link" href="{{ nav_href }}">{% include t.html en=nav_en.title cs=nav_cs.title %}</a>
+            {% elsif page.layout == "sections" %}
             <a class="nav-link page-scroll" href="#{{ slug }}">{% include t.html en=nav_en.title cs=nav_cs.title %}</a>
             {% else %}
             <a class="nav-link" href="{{ sec_base | relative_url }}#{{ slug }}">{% include t.html en=nav_en.title cs=nav_cs.title %}</a>
