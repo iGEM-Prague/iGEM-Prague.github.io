@@ -69,14 +69,21 @@ small {
   font-size: 80%;
 }
 
+// No native elastic overscroll at the top: the navbar stretches instead (js.html)
+html {
+  overscroll-behavior-y: none;
+}
+
+// Paragraph spacing: one 0.75rem gap between paragraphs
 p {
-  padding: 0.5rem 0rem;
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 0.75rem;
   line-height: 1.5;
   max-width: 80ch;
   margin-left: auto;
   margin-right: auto;
   @media (min-width: 768px) {
-    padding: 0.3rem 0rem;
     line-height: 1.6;
   }
 }
@@ -142,18 +149,15 @@ a {
   text-transform: uppercase;
   background-color: var(--primary-color);
   overflow-y: auto;
+  // --nav-stretch: extra height while the page is pulled down at the top (js.html),
+  // split above and below so the contents stay vertically centered
+  padding-top: calc(0.5rem + var(--nav-stretch, 0px) / 2);
+  padding-bottom: calc(0.5rem + var(--nav-stretch, 0px) / 2);
   @media (min-width: 768px) {
-    padding: 1.25rem 0;
+    padding: calc(1.25rem + var(--nav-stretch, 0px) / 2) 0;
     letter-spacing: 1px;
-    -webkit-transition:
-      background 0.5s ease-in-out,
-      padding 0.5s ease-in-out;
-    -moz-transition:
-      background 0.5s ease-in-out,
-      padding 0.5s ease-in-out;
-    transition:
-      background 0.5s ease-in-out,
-      padding 0.5s ease-in-out;
+    // Compact while scrolled down; full size immediately at the top (no animation,
+    // so it always touches the header image)
     &.top-nav-collapse {
       padding: 0;
       background: var(--primary-color);
@@ -190,7 +194,7 @@ a {
   min-height: calc(100vh - var(--navbar-height, 5rem));
   min-height: calc(100svh - var(--navbar-height, 5rem));
   text-align: center;
-  margin-top: var(--navbar-height, 5rem);
+  margin-top: calc(var(--navbar-height, 5rem) + var(--nav-stretch, 0px));
   padding-top: 2rem;
   // Let the image continue below the logo
   padding-bottom: 4rem;
@@ -228,13 +232,29 @@ a {
   }
 }
 
+// Space between the main parts of a page. Mostly padding, so a heading reached
+// through a navbar link still ends up below the fixed navbar.
 .content-section {
-  margin-top: 5.02rem;
-  padding-top: 5.02rem;
+  margin-top: 1rem;
+  padding-top: 3rem;
   @media (min-width: 768px) {
-    margin-top: 7.8125rem;
-    padding-top: 7.8125rem;
+    margin-top: 2rem;
+    padding-top: 4rem;
   }
+}
+
+// The heading that opens a section needs no extra space above it
+.content-section h2:first-child {
+  margin-top: 0;
+}
+
+// Pages without the header image start right below the fixed navbar
+// (its height is measured in js.html)
+.navbar + .content-section {
+  margin-top: calc(var(--navbar-height, 5rem) + 1rem + var(--nav-stretch, 0px));
+}
+
+.content-section {
   img {
     display: block;
     max-width: 100%;
@@ -294,8 +314,8 @@ a {
 
   // Center paragraphs when section has text-center class
   &.text-center p {
-    margin: 1.5rem auto;
-    padding: 1rem 1.25rem;
+    margin: 0 auto 0.75rem;
+    padding: 0 1.25rem;
     text-align: center;
   }
 }
@@ -322,11 +342,11 @@ a {
 
 ul.social-buttons li a {
   display: block;
-  width: 3.11rem;
-  height: 3.11rem;
+  width: 6.22rem;
+  height: 6.22rem;
   border-radius: 100%;
-  line-height: 3.11rem;
-  font-size: 1.5rem;
+  line-height: 6.22rem;
+  font-size: 3rem;
   outline: 0;
   color: var(--secondary-color);
   -webkit-transition: all 0.3s;
