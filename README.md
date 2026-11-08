@@ -28,6 +28,22 @@ except changes to `_config.yml`, which need a restart (`docker-compose restart`)
 Push to `main` for deploy using GitHub Actions.
 The page will be live on `https://igem-prague.github.io/`.
 
+## Third-party files
+
+The site loads nothing from other servers; everything is stored in the repository:
+
+| What | Where | License |
+| ---- | ----- | ------- |
+| Bootstrap 5.3.3 styles: only the parts the site uses | `_sass/bootstrap/`, compiled by `css/bootstrap.scss` | MIT |
+| Bootstrap 5.3.3 JavaScript (phone menu) | `assets/bootstrap/bootstrap.min.js` | MIT |
+| Font Awesome Free 7.0.1 icons (solid + brands) | `assets/fontawesome/` | CC BY 4.0 / OFL / MIT |
+| Maven Pro font | `assets/fonts/` | SIL OFL |
+
+To use another Bootstrap component (e.g. tables, cards), copy its file from the
+Bootstrap 5.3.3 source (`scss/`) to `_sass/bootstrap/` and add an `@import` to `css/bootstrap.scss`.
+Any [Font Awesome Free](https://fontawesome.com/search?ic=free) solid or brand icon works,
+e.g. a new network in `social:` in `_config.yml`.
+
 ## Structure of the site
 
 | Page                             | Content                                         |

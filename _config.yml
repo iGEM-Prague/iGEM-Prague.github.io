@@ -118,6 +118,10 @@ exclude:
   - Dockerfile
   - docker-compose.yml
   - TODO.md
+  # notes next to the downloaded third-party files
+  - assets/bootstrap/README.md
+  - assets/fontawesome/README.md
+  - assets/fonts/README.md
 
 # Enable minification of SASS
 sass:

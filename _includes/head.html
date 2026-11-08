@@ -35,13 +35,16 @@
 
   <link rel="canonical" href="{{ page.url | absolute_url | replace:'index.html' }}" />
 
+  <!-- Everything is served from this site (assets/, css/); no external requests.
+       Where the files come from and how to get more: README.md in assets/*/ and _sass/bootstrap/ -->
   <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
-    integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
+    rel="preload"
+    href="{{ '/assets/fonts/maven-pro-latin.woff2' | relative_url }}"
+    as="font"
+    type="font/woff2"
+    crossorigin
   />
+  <link href="{{ '/css/bootstrap.css' | relative_url }}" rel="stylesheet" />
   <link href="{{ '/css/grayscale.css' | relative_url }}" rel="stylesheet" />
 
   {% if page.layout == "post" %}
@@ -49,20 +52,10 @@
   <link href="{{ '/css/share.css' | relative_url }}" rel="stylesheet" />
   {% endif %}
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400..900&display=swap"
-    rel="stylesheet"
-  />
-  <link
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-    rel="stylesheet"
-    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  />
+  <!-- Icons: Font Awesome Free 7.0.1, solid and brand icons (assets/fontawesome/, see its README.md) -->
+  <link href="{{ '/assets/fontawesome/css/fontawesome.min.css' | relative_url }}" rel="stylesheet" />
+  <link href="{{ '/assets/fontawesome/css/solid.min.css' | relative_url }}" rel="stylesheet" />
+  <link href="{{ '/assets/fontawesome/css/brands.min.css' | relative_url }}" rel="stylesheet" />
 
   {% comment %}
   Google Analytics + cookie consent banner, disabled for now.
