@@ -6,7 +6,6 @@
     <div class="col-md-10 col-12">
       {{ section.content | markdownify }} {% if site.email %} {% if site.email
       contains '@' %} {% assign newemail = site.email | split: '@' %}
-      <p class="pt-3">Interested? Contact us!</p>
       <p>
         <script>
           function join_at_email(user, domain) {

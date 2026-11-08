@@ -52,15 +52,13 @@ vkontakte-share: False
 # Timeline #
 ############
 
-# Timeline entries are in _data/timeline.yml.
-# Image shown at the end of the timeline:
-timeline-img: "/img/team-logo.webp"
+# Timeline entries are in _sections/timeline.md.
 
 ###########
 # Contact #
 ###########
 
-email: "TODO email"
+email: "igemteamprague@gmail.com"
 
 ################
 # Author Blurb #

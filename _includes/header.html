@@ -4,7 +4,11 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12 col-md-offset-2">
-          <span class="intro-text"></span>
+          {% if header_text and header_text != empty %}
+          <div class="intro-text-box">
+            <span class="intro-text"></span>
+          </div>
+          {% endif %}
           <h5>&nbsp;</h5>
           <a href="#{{ sec_index.sections.first }}" class="page-scroll">
             <img

@@ -37,8 +37,9 @@
           </li>
         {% endfor %}
         {% if sec_dir == "" %}
-          {% comment %} Newest project = first entry of _data/timeline.yml {% endcomment %}
-          {% assign recent_link = site.data.timeline.first.link %}
+          {% comment %} Newest project = first timeline entry in _sections/timeline.md {% endcomment %}
+          {% assign timeline_section = site.sections | where: "relative_path", "_sections/timeline.md" | first %}
+          {% assign recent_link = timeline_section.events.first.link %}
           <li class="nav-item pe-2 ps-2">
             {% if recent_link contains "://" %}
             <a class="nav-link" href="{{ recent_link }}" target="_blank" rel="noopener">Recent project</a>

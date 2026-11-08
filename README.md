@@ -47,13 +47,12 @@ front matter (the part between `---` lines) is what gets shown.
 | What                       | Where                                                         |
 | -------------------------- | ------------------------------------------------------------- |
 | About us                   | `_sections/about.md`                                          |
-| Timeline heading           | `_sections/timeline.md`                                       |
-| Timeline entries           | `_data/timeline.yml`                                          |
-| "Recent project" nav link  | first entry of `_data/timeline.yml` (automatically)           |
+| Timeline heading, entries  | `_sections/timeline.md`                                       |
+| "Recent project" nav link  | first timeline entry (automatically)                          |
 | Contact text               | `_sections/contact.md`                                        |
 | Contact email              | `email:` in `_config.yml`                                     |
 | Instagram / GitHub icons   | `social:` in `_config.yml`                                    |
-| Text typed in the header   | `header-text:` in `_sections/index.md`                        |
+| Text typed in the header   | `header-text:` in `_sections/index.md` (a list: one phrase is picked at random) |
 | Order of sections          | `sections:` in `_sections/index.md`                           |
 | Header background, logo    | `background-img:`, `me-img:` in `_config.yml` (files in `img/`) |
 
@@ -61,7 +60,7 @@ The `title:` in the front matter of each section is its name in the navigation b
 
 ### Timeline entries
 
-`_data/timeline.yml` lists one entry per year, newest first:
+`events:` in the front matter of `_sections/timeline.md` lists one entry per year, newest first:
 
 ```yaml
 - date: "2026"
@@ -86,7 +85,7 @@ External links open in a new tab.
 | News intro text                 | `_sections/2026/news.md`                  |
 | Members intro text              | `_sections/2026/members.md`               |
 | Team members                    | `members:` in `_sections/2026/members.md` |
-| Text typed in the header        | `header-text:` in `_sections/2026/index.md` |
+| Text typed in the header        | `header-text:` in `_sections/2026/index.md` (one phrase or a list) |
 | Order of sections               | `sections:` in `_sections/2026/index.md`  |
 
 The intro texts of News and Members are shown both on the 2026 page and
@@ -152,6 +151,6 @@ Filtered views can be shared, e.g. `/2026/news/?category=labwork&q=plasmid`.
 2. Copy the folder `2026/` (page files) to `2027/` and in each of its three files
    replace `2026` by `2027` (`sections-dir`, `year`, `title`, `permalink`).
 3. Put the year's posts to `_posts/2027/` and images to `img/2027/`.
-4. Add the year to the top of `_data/timeline.yml` with `link: "/2027/"`.
+4. Add the year to the top of `events:` in `_sections/timeline.md` with `link: "/2027/"`.
 
 Old years keep working unchanged.

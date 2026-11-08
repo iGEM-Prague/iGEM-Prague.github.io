@@ -151,9 +151,7 @@ a {
   overflow-y: auto;
   @media (min-width: 768px) {
     padding: 1.25rem 0;
-    border-bottom: none;
     letter-spacing: 1px;
-    background: transparent;
     -webkit-transition:
       background 0.5s ease-in-out,
       padding 0.5s ease-in-out;
@@ -190,11 +188,19 @@ a {
 }
 
 .intro {
-  display: table;
+  // Fill the screen from right below the fixed navbar (height measured in js.html)
+  // to the bottom; svh keeps mobile browser toolbars from cutting it off
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   width: 100%;
-  height: auto;
+  min-height: calc(100vh - var(--navbar-height, 5rem));
+  min-height: calc(100svh - var(--navbar-height, 5rem));
   text-align: center;
-  padding-top: 20rem;
+  margin-top: var(--navbar-height, 5rem);
+  padding-top: 2rem;
+  // Let the image continue below the logo
+  padding-bottom: 4rem;
   color: var(--font-color);
   background-color: var(--primary-color);
   {% if site.background-img %}
@@ -207,17 +213,23 @@ a {
   background-size: cover;
   -o-background-size: cover;
   .intro-body {
-    display: table-cell;
-    vertical-align: middle;
     .brand-heading {
       font-size: 2.5rem;
     }
     .intro-text {
       font-size: 1.3rem;
     }
+    // Readable box behind the typed text on top of the background image
+    .intro-text-box {
+      display: inline-block;
+      min-height: 3rem;
+      padding: 0.5rem 1.5rem;
+      border-radius: 0.5rem;
+      background-color: var(--primary-color);
+      background-color: color-mix(in srgb, var(--primary-color) 85%, transparent);
+    }
   }
   @media (min-width: 768px) {
-    height: 100%;
     .intro-body {
       .brand-heading {
         font-size: 6.25rem;
@@ -226,9 +238,6 @@ a {
         font-size: 1.6rem;
       }
     }
-  }
-  @media (min-width: 1200px) {
-    padding-top: 30rem;
   }
 }
 
@@ -566,6 +575,21 @@ body {
   clear: both;
 }
 
+// Each entry is a row: the text block and the circle are both centered vertically
+.timeline {
+  --timeline-img: 5.02rem;
+}
+
+.timeline > li {
+  display: flex;
+  align-items: center;
+  min-height: var(--timeline-img);
+  &:before,
+  &:after {
+    display: none;
+  }
+}
+
 .timeline > li .timeline-panel {
   float: right;
   position: relative;
@@ -591,9 +615,11 @@ body {
 .timeline > li .timeline-image {
   z-index: 100;
   position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   left: 0;
-  width: 5.02rem;
-  height: 5.02rem;
+  width: var(--timeline-img);
+  height: var(--timeline-img);
   border: 0.4375rem solid var(--background-color);
   border-radius: 100%;
   text-align: center;
@@ -648,12 +674,39 @@ body {
   text-transform: none;
 }
 
+// Year and project link on one line
+.timeline .timeline-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 0.75rem;
+  h4 {
+    margin-bottom: 0.5rem;
+  }
+}
+
 .timeline .timeline-body > p,
 .timeline .timeline-body > ul {
   margin-bottom: 0;
 }
 
+// Description aligned with the year (overrides the centered section paragraphs)
+.content-section .timeline .timeline-body p {
+  text-align: inherit;
+  margin: 0;
+  padding: 0;
+  max-width: none;
+  // No automatic word splitting (the theme turns it on for the whole page)
+  hyphens: manual;
+  -webkit-hyphens: manual;
+}
+
 @media (min-width: 768px) {
+  // Circle size; the text panels end 1.5rem from the circle
+  .timeline {
+    --timeline-img: 6.25rem;
+  }
+
   .timeline:before {
     left: 50%;
     transform: translateX(-50%);
@@ -666,17 +719,26 @@ body {
   }
 
   .timeline > li .timeline-panel {
-    float: left;
-    width: 41%;
-    padding: 0 1.25rem 1.25rem 1.875rem;
+    width: calc(50% - var(--timeline-img) / 2 - 1.5rem);
+    padding: 0;
     text-align: right;
+  }
+
+  .timeline > li.timeline-inverted {
+    justify-content: flex-end;
+  }
+
+  .timeline > li.timeline-inverted > .timeline-panel {
+    padding: 0;
+  }
+
+  .timeline > li:not(.timeline-inverted) .timeline-heading {
+    justify-content: flex-end;
   }
 
   .timeline > li .timeline-image {
     left: 50%;
-    transform: translateX(-50%);
-    width: 6.25rem;
-    height: 6.25rem;
+    transform: translate(-50%, -50%);
   }
 
   .timeline > li .timeline-image h4 {
@@ -692,20 +754,14 @@ body {
 }
 
 @media (min-width: 992px) {
+  .timeline {
+    --timeline-img: 9.375rem;
+  }
   .timeline:before {
     width: 0.4375rem;
   }
   .timeline > li {
     min-height: 9.375rem;
-  }
-
-  .timeline > li .timeline-panel {
-    padding: 0 1.25rem 1.25rem;
-  }
-
-  .timeline > li .timeline-image {
-    width: 9.375rem;
-    height: 9.375rem;
   }
 
   .timeline > li .timeline-image h4 {
@@ -720,13 +776,8 @@ body {
     min-height: 10.625rem;
   }
 
-  .timeline > li .timeline-panel {
-    padding: 0 1.25rem 1.25rem 6.25rem;
-  }
-
-  .timeline > li .timeline-image {
-    width: 9.75rem;
-    height: 9.75rem;
+  .timeline {
+    --timeline-img: 9.75rem;
   }
 
   .timeline > li .timeline-image h4 {

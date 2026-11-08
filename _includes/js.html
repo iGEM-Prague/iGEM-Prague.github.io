@@ -30,6 +30,18 @@ To use this Jekyll theme, visit: https://github.com/le4ker/personal-jekyll-theme
     }
   }
 
+  // Header image starts below the navbar: measure its full (not collapsed) height
+  function setNavbarHeight() {
+    const navbar = document.querySelector(".navbar");
+    if (navbar && !navbar.classList.contains("top-nav-collapse")) {
+      document.documentElement.style.setProperty(
+        "--navbar-height",
+        navbar.offsetHeight + "px",
+      );
+    }
+  }
+  document.addEventListener("DOMContentLoaded", setNavbarHeight);
+  window.addEventListener("resize", setNavbarHeight);
   document.addEventListener("DOMContentLoaded", toggleNavCollapse);
   window.addEventListener("scroll", toggleNavCollapse);
 
@@ -155,8 +167,11 @@ To use this Jekyll theme, visit: https://github.com/le4ker/personal-jekyll-theme
 ></script>
 <script type="text/javascript">
   document.addEventListener("DOMContentLoaded", function () {
+    // header-text is one phrase or a list of phrases; show a random one
+    var phrases = [].concat({{ header_text | jsonify }});
+    var phrase = phrases[Math.floor(Math.random() * phrases.length)];
     new Typed(".intro-text", {
-      strings: [{{ header_text | jsonify }}],
+      strings: [phrase],
       typeSpeed: 50,
       startDelay: 1000,
       loop: false,
