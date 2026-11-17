@@ -14,3 +14,5 @@ only_en: { cs: "anglicky" }
 read_in_en: "Read in English"
 read_in_cs: "Číst česky"
 switch_language: "Switch language / Přepnout jazyk"
+# Heading above the sponsor logos in the footer (2026 pages)
+supported_by: { en: "Supported by", cs: "Podporují nás" }

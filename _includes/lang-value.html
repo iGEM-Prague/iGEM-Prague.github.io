@@ -1,0 +1,14 @@
+{%- comment -%}
+  Sets lang_value to the include.lang ("en" / "cs") version of include.v: v itself when it is
+  a plain value, v.en / v.cs when it is a pair (falling back to the other language).
+{%- endcomment -%}
+{%- assign lv_first = include.v | jsonify | slice: 0 -%}
+{%- if lv_first == "{" -%}
+  {%- if include.lang == "cs" -%}
+    {%- assign lang_value = include.v.cs | default: include.v.en -%}
+  {%- else -%}
+    {%- assign lang_value = include.v.en | default: include.v.cs -%}
+  {%- endif -%}
+{%- else -%}
+  {%- assign lang_value = include.v -%}
+{%- endif -%}

@@ -1,0 +1,38 @@
+{%- comment -%}
+  Sponsor logos of the current year (sponsors: in _sections/<year>/index.md); nothing on pages
+  without sponsors. A sponsor whose name, link or logo differs per language is shown twice,
+  one version per language (data-l), the other one hidden by the language switch.
+{%- endcomment -%}
+{%- if sec_index.sponsors and sec_index.sponsors != empty -%}
+<div class="container sponsors-block">
+  <h5 class="sponsors-title">{% include t.html v=site.data.i18n.supported_by %}</h5>
+  <ul class="sponsors">
+    {%- for sponsor in sec_index.sponsors %}
+      {%- include lang-value.html v=sponsor.name lang="en" -%}{%- assign sp_name_en = lang_value -%}
+      {%- include lang-value.html v=sponsor.name lang="cs" -%}{%- assign sp_name_cs = lang_value -%}
+      {%- include lang-value.html v=sponsor.url lang="en" -%}{%- assign sp_url_en = lang_value -%}
+      {%- include lang-value.html v=sponsor.url lang="cs" -%}{%- assign sp_url_cs = lang_value -%}
+      {%- include lang-value.html v=sponsor.logo lang="en" -%}{%- assign sp_logo_en = lang_value -%}
+      {%- include lang-value.html v=sponsor.logo lang="cs" -%}{%- assign sp_logo_cs = lang_value -%}
+      {%- if sp_name_en == sp_name_cs and sp_url_en == sp_url_cs and sp_logo_en == sp_logo_cs %}
+    <li>
+      <a href="{{ sp_url_en }}" target="_blank" rel="noopener" title="{{ sp_name_en | escape }}">
+        <img src="{{ sp_logo_en | relative_url }}" alt="{{ sp_name_en | escape }}" loading="lazy" />
+      </a>
+    </li>
+      {%- else %}
+    <li data-l="en">
+      <a href="{{ sp_url_en }}" target="_blank" rel="noopener" title="{{ sp_name_en | escape }}">
+        <img src="{{ sp_logo_en | relative_url }}" alt="{{ sp_name_en | escape }}" loading="lazy" />
+      </a>
+    </li>
+    <li data-l="cs">
+      <a href="{{ sp_url_cs }}" target="_blank" rel="noopener" title="{{ sp_name_cs | escape }}">
+        <img src="{{ sp_logo_cs | relative_url }}" alt="{{ sp_name_cs | escape }}" loading="lazy" />
+      </a>
+    </li>
+      {%- endif %}
+    {%- endfor %}
+  </ul>
+</div>
+{%- endif -%}

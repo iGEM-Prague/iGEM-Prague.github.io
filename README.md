@@ -127,6 +127,7 @@ External links open in a new tab.
 | Team members                    | `members:` in `_sections/2026/members.md`                  |
 | Text typed in the header        | `header-text:` in `_sections/2026/index.md` (one phrase, a list, or `en` / `cs` lists) |
 | Order of sections               | `sections:` in `_sections/2026/index.md`                   |
+| Sponsor logos in the footer     | `sponsors:` in `_sections/2026/index.md`, logos in `img/2026/sponsors/` |
 
 The intro texts of News and Members are shown both on the 2026 page and
 above the list of all news / members.
@@ -135,6 +136,24 @@ In the navigation bar, News and Members open their separate pages (`/2026/news/`
 `/2026/members/`) because of `nav-link:` in `news.en.md` / `members.en.md`. Any section
 can get one: a relative path is taken from the year's page (`news/` → `/2026/news/`),
 a full URL opens that site. Without `nav-link:` the navbar scrolls to the section.
+
+### Sponsors
+
+The footer of all 2026 pages shows the logos listed in `sponsors:` in `_sections/2026/index.md`,
+in that order (one row on computers, one column on phones). `name` (shown when hovering and to
+screen readers), `url` and `logo` can each be one value or an `en` / `cs` pair:
+
+```yaml
+sponsors:
+  - name: "IOCB Prague"
+    url: { en: "https://www.uochb.cz/en", cs: "https://www.uochb.cz/cs" }
+    logo: "/img/2026/sponsors/iocb.webp"
+```
+
+Logos go to `img/2026/sponsors/`: transparent background, WebP, about 160 px high. Convert with
+ImageMagick, trimming the empty border so all logos look equally big:
+
+    magick logo.png -trim +repage -resize x160 -define webp:lossless=true img/2026/sponsors/name.webp
 
 ### Adding a team member
 

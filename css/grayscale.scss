@@ -461,6 +461,63 @@ footer {
     padding: 0;
     text-align: center;
   }
+
+  // Sponsor logos (2026 pages): one row on wider screens, one column on phones
+  .sponsors-block {
+    padding: 1.5rem 1.25rem 1rem;
+  }
+  .sponsors-title {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    color: var(--font-color-light);
+    margin: 0 0 1.25rem;
+  }
+  .sponsors {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    @media (min-width: 768px) {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem 2.5rem;
+    }
+    // Each logo is a link to the sponsor's site: show it on hover / keyboard focus
+    a {
+      display: block;
+      border-radius: 0.25rem;
+      transition: transform 0.2s ease;
+      &:hover,
+      &:focus-visible {
+        transform: scale(1.06);
+      }
+      &:focus-visible {
+        outline: 2px solid var(--secondary-color);
+        outline-offset: 0.4rem;
+      }
+    }
+    img {
+      display: block;
+      height: 3rem;
+      width: auto;
+      max-width: 100%;
+    }
+  }
+}
+
+// Dark mode: a glow in the text color around the shapes of the (mostly dark) sponsor logos
+// keeps them readable
+[data-theme="dark"] footer .sponsors img {
+  // five thin layers (each adds to the previous one) build a thick solid outline,
+  // the last one a soft halo around it
+  filter: drop-shadow(0 0 2px var(--font-color)) drop-shadow(0 0 2px var(--font-color))
+    drop-shadow(0 0 2px var(--font-color)) drop-shadow(0 0 2px var(--font-color))
+    drop-shadow(0 0 2px var(--font-color)) drop-shadow(0 0 10px var(--font-color));
 }
 
 // Horizontal lines (between news posts, above the footer copyright, <hr>)
