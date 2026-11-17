@@ -140,6 +140,17 @@ a {
   }
 }
 
+// This year's project in the main-page navbar stands out: its own slightly darker
+// background (also in dark mode, as it is mixed from the text color)
+.nav-item.nav-item-highlight {
+  background-color: color-mix(in srgb, var(--font-color) 10%, var(--primary-color));
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: color-mix(in srgb, var(--font-color) 18%, var(--primary-color));
+  }
+}
+
 .nav-item {
   text-align: left;
   -webkit-transition: background 0.3s ease-in-out;
