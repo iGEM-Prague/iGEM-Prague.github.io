@@ -163,15 +163,16 @@ Add an entry to `members:` in `_sections/2027/members.md`:
 members:
   - name: "Jana Nováková"
     role: { en: "Wet lab", cs: "Laboratoř" }
-    photo: "/img/2027/members/jana.webp"
+    photo: "/img/2027/members/jana_novakova.webp"
     bio:
       en: "A few sentences about Jana."
       cs: "Pár vět o Janě."
 ```
 
-Put the photo to `img/2027/members/`. It is shown as a circle, so use a square
-photo with the face in the middle, about 400×400 px (`.webp` or `.jpg`).
-Without a `photo`, the team logo is shown instead.
+Put the photo to `img/2027/members/`, named after the person in lowercase, with spaces
+replaced by `_` and without diacritics (`jana_novakova.webp`). It is shown as a circle, so use
+a square photo with the face in the middle, about 400×400 px. Until the photo file exists
+(or without a `photo`), the team logo is shown instead.
 
 ## Adding news posts
 

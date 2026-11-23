@@ -18,10 +18,16 @@
 
       <div class="row justify-content-center pt-4">
         {% for member in section.members %}
+        {% comment %} The team logo until the member's photo file exists {% endcomment %}
+        {% assign member_photo = site.me-img %}
+        {% if member.photo and member.photo != "" %}
+          {% assign photo_file = site.static_files | where: "path", member.photo | first %}
+          {% if photo_file %}{% assign member_photo = member.photo %}{% endif %}
+        {% endif %}
         <div class="col-sm-6 col-lg-4 member">
           <img
             class="rounded-circle member-photo"
-            src="{{ member.photo | default: site.me-img | relative_url }}"
+            src="{{ member_photo | relative_url }}"
             alt="{{ member.name }}"
             loading="lazy"
           />
