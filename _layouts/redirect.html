@@ -1,0 +1,18 @@
+<!-- Redirect Layout: forwards an old address to page.redirect_to (keeps ?query and #anchor) -->
+{%- assign target = page.redirect_to | relative_url -%}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Redirecting…</title>
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href="{{ page.redirect_to | absolute_url }}" />
+    <meta http-equiv="refresh" content="0; url={{ target }}" />
+    <script>
+      window.location.replace("{{ target }}" + window.location.search + window.location.hash);
+    </script>
+  </head>
+  <body>
+    <p>This page has moved to <a href="{{ target }}">{{ page.redirect_to | absolute_url }}</a>.</p>
+  </body>
+</html>

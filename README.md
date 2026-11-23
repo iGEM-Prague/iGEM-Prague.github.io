@@ -49,12 +49,12 @@ e.g. a new network in `social:` in `_config.yml`.
 | Page                             | Content                                         |
 | -------------------------------- | ----------------------------------------------- |
 | `/` (main page)                  | About us, Timeline, Contact                     |
-| `/2026/`                         | About project, News (latest 3 posts), Members   |
-| `/2026/news/`                    | All news of 2026, with search and category filter |
-| `/2026/members/`                 | Team members of 2026                            |
-| `/2026/news/MM/DD/title/`        | A single news post (Czech version: `.../title/cs/`) |
+| `/2027/`                         | About project, News (latest 3 posts), Members   |
+| `/2027/news/`                    | All news of 2027, with search and category filter |
+| `/2027/members/`                 | Team members of 2027                            |
+| `/2027/news/MM/DD/title/`        | A single news post (Czech version: `.../title/cs/`) |
 
-Texts of the pages live in `_sections/` (main page) and `_sections/2026/` (2026 page).
+Texts of the pages live in `_sections/` (main page) and `_sections/2027/` (2027 page).
 
 ## Two languages (English and Czech)
 
@@ -101,13 +101,13 @@ Texts are written like this:
 `events:` in `_sections/timeline.md` lists one entry per year, newest first:
 
 ```yaml
-- date: "2026"
+- date: "2027"
   title: "CrocoVoyage"
   description:
     en: "One or two sentences about the project."
     cs: "Jedna nebo dvě věty o projektu."
   image: "/img/team-logo.webp"
-  link: "/2026/"                                # page of this site...
+  link: "/2027/"                                # page of this site...
 - date: "2025"
   title: "..."
   description: { en: "...", cs: "..." }
@@ -117,29 +117,29 @@ Texts are written like this:
 
 External links open in a new tab.
 
-## Editing the 2026 page
+## Editing the 2027 page
 
 | What                            | Where                                                      |
 | ------------------------------- | ---------------------------------------------------------- |
-| About project                   | `_sections/2026/about.en.md`, `about.cs.md`                |
-| News intro text                 | `_sections/2026/news.en.md`, `news.cs.md`                  |
-| Members intro text              | `_sections/2026/members.en.md`, `members.cs.md`            |
-| Team members                    | `members:` in `_sections/2026/members.md`                  |
-| Text typed in the header        | `header-text:` in `_sections/2026/index.md` (one phrase, a list, or `en` / `cs` lists) |
-| Order of sections               | `sections:` in `_sections/2026/index.md`                   |
-| Sponsor logos in the footer     | `sponsors:` in `_sections/2026/index.md`, logos in `img/2026/sponsors/` |
+| About project                   | `_sections/2027/about.en.md`, `about.cs.md`                |
+| News intro text                 | `_sections/2027/news.en.md`, `news.cs.md`                  |
+| Members intro text              | `_sections/2027/members.en.md`, `members.cs.md`            |
+| Team members                    | `members:` in `_sections/2027/members.md`                  |
+| Text typed in the header        | `header-text:` in `_sections/2027/index.md` (one phrase, a list, or `en` / `cs` lists) |
+| Order of sections               | `sections:` in `_sections/2027/index.md`                   |
+| Sponsor logos in the footer     | `sponsors:` in `_sections/2027/index.md`, logos in `img/2027/sponsors/` |
 
-The intro texts of News and Members are shown both on the 2026 page and
+The intro texts of News and Members are shown both on the 2027 page and
 above the list of all news / members.
 
-In the navigation bar, News and Members open their separate pages (`/2026/news/`,
-`/2026/members/`) because of `nav-link:` in `news.en.md` / `members.en.md`. Any section
-can get one: a relative path is taken from the year's page (`news/` → `/2026/news/`),
+In the navigation bar, News and Members open their separate pages (`/2027/news/`,
+`/2027/members/`) because of `nav-link:` in `news.en.md` / `members.en.md`. Any section
+can get one: a relative path is taken from the year's page (`news/` → `/2027/news/`),
 a full URL opens that site. Without `nav-link:` the navbar scrolls to the section.
 
 ### Sponsors
 
-The footer of all 2026 pages shows the logos listed in `sponsors:` in `_sections/2026/index.md`,
+The footer of all 2027 pages shows the logos listed in `sponsors:` in `_sections/2027/index.md`,
 in that order (one row on computers, one column on phones). `name` (shown when hovering and to
 screen readers), `url` and `logo` can each be one value or an `en` / `cs` pair:
 
@@ -147,64 +147,64 @@ screen readers), `url` and `logo` can each be one value or an `en` / `cs` pair:
 sponsors:
   - name: "IOCB Prague"
     url: { en: "https://www.uochb.cz/en", cs: "https://www.uochb.cz/cs" }
-    logo: "/img/2026/sponsors/iocb.webp"
+    logo: "/img/2027/sponsors/iocb.webp"
 ```
 
-Logos go to `img/2026/sponsors/`: transparent background, WebP, about 160 px high. Convert with
+Logos go to `img/2027/sponsors/`: transparent background, WebP, about 160 px high. Convert with
 ImageMagick, trimming the empty border so all logos look equally big:
 
-    magick logo.png -trim +repage -resize x160 -define webp:lossless=true img/2026/sponsors/name.webp
+    magick logo.png -trim +repage -resize x160 -define webp:lossless=true img/2027/sponsors/name.webp
 
 ### Adding a team member
 
-Add an entry to `members:` in `_sections/2026/members.md`:
+Add an entry to `members:` in `_sections/2027/members.md`:
 
 ```yaml
 members:
   - name: "Jana Nováková"
     role: { en: "Wet lab", cs: "Laboratoř" }
-    photo: "/img/2026/members/jana.webp"
+    photo: "/img/2027/members/jana.webp"
     bio:
       en: "A few sentences about Jana."
       cs: "Pár vět o Janě."
 ```
 
-Put the photo to `img/2026/members/`. It is shown as a circle, so use a square
+Put the photo to `img/2027/members/`. It is shown as a circle, so use a square
 photo with the face in the middle, about 400×400 px (`.webp` or `.jpg`).
 Without a `photo`, the team logo is shown instead.
 
 ## Adding news posts
 
-A post is written in one language; English posts go to `_posts/2026/en/`, Czech ones
-to `_posts/2026/cs/`.
+A post is written in one language; English posts go to `_posts/2027/en/`, Czech ones
+to `_posts/2027/cs/`.
 
 1. Create a file named `YYYY-MM-DD-title.md`, e.g.
-   `_posts/2026/en/2026-11-05-first-transformation.md`. The date in the name is the
+   `_posts/2027/en/2027-11-05-first-transformation.md`. The date in the name is the
    publishing date; the rest becomes the URL (use lowercase letters, numbers and `-`).
 2. Start it with front matter, then write the post in Markdown:
 
    ```markdown
    ---
    title: "First successful transformation"
-   date: 2026-11-05 10:00:00 +0100
+   date: 2027-11-05 10:00:00 +0100
    categories: [labwork]
    ---
 
    Text of the post...
 
-   ![Colonies on a plate](/img/2026/news/colonies.webp)
+   ![Colonies on a plate](/img/2027/news/colonies.webp)
    ```
 
-3. Put images to `img/2026/news/` and link them as shown above.
+3. Put images to `img/2027/news/` and link them as shown above.
 
 The post's year (from its `date`) decides which year page it appears on.
-The newest 3 posts are shown on the 2026 page, all of them on `/2026/news/`.
+The newest 3 posts are shown on the 2027 page, all of them on `/2027/news/`.
 
 ### Translating a post
 
 To publish a post in both languages, give the translation **the same file name** in the
-other folder, e.g. `_posts/2026/en/2026-11-05-first-transformation.md` and
-`_posts/2026/cs/2026-11-05-first-transformation.md`. They are linked automatically:
+other folder, e.g. `_posts/2027/en/2027-11-05-first-transformation.md` and
+`_posts/2027/cs/2027-11-05-first-transformation.md`. They are linked automatically:
 
 - the news lists show each reader only the version in their language,
 - the CZ / EN button on the post opens the other version, and a link at the top of
@@ -224,15 +224,15 @@ Use the same spelling each time (also in both language versions), otherwise you 
 
 The search box on the News page matches words in post titles, texts and
 categories, ignoring case and diacritics (`vesmir` finds `vesmír`).
-Filtered views can be shared, e.g. `/2026/news/?category=labwork&q=plasmid`.
+Filtered views can be shared, e.g. `/2027/news/?category=labwork&q=plasmid`.
 
-## Adding a new year (e.g. 2027)
+## Adding a new year (e.g. 2028)
 
-1. Copy `_sections/2026/` to `_sections/2027/` and rewrite the texts; empty the
-   `members:` list and change `header-text:`.
-2. Copy the folder `2026/` (page files) to `2027/` and in each of its three files
-   replace `2026` by `2027` (`sections-dir`, `year`, `title`, `permalink`).
-3. Put the year's posts to `_posts/2027/en/` and `_posts/2027/cs/`, images to `img/2027/`.
-4. Add the year to the top of `events:` in `_sections/timeline.md` with `link: "/2027/"`.
+1. Copy `_sections/2027/` to `_sections/2028/` and rewrite the texts; empty the
+   `members:` list and change `header-text:` and `sponsors:`.
+2. Copy the folder `2027/` (page files) to `2028/` and in each of its three files
+   replace `2027` by `2028` (`sections-dir`, `year`, `title`, `permalink`).
+3. Put the year's posts to `_posts/2028/en/` and `_posts/2028/cs/`, images to `img/2028/`.
+4. Add the year to the top of `events:` in `_sections/timeline.md` with `link: "/2028/"`.
 
 Old years keep working unchanged.

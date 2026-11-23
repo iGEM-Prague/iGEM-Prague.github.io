@@ -3,5 +3,3 @@ title: Tým
 ---
 
 ## Tým
-
-TODO
