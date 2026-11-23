@@ -33,7 +33,14 @@
           />
           <h4 class="pt-3 mb-1">{{ member.name }}</h4>
           <p class="member-role">{% include t.html v=member.role %}</p>
-          <p class="member-bio">{% include t.html v=member.bio %}</p>
+          <div class="member-bio-wrap">
+            <p class="member-bio">{% include t.html v=member.bio %}</p>
+          </div>
+          {% comment %} Shown by the script below only when the bio is longer than 8 lines {% endcomment %}
+          <button type="button" class="btn btn-default btn-sm member-more" aria-expanded="false" hidden>
+            <span class="label-more">{% include t.html v=site.data.i18n.show_more %}</span>
+            <span class="label-less">{% include t.html v=site.data.i18n.show_less %}</span>
+          </button>
         </div>
         {% endfor %}
       </div>
@@ -41,6 +48,86 @@
 
     {% include footer.html %}
     {% include js.html %}
+
+    <script>
+      // Bios longer than 8 lines are cut, with a button to show the rest. Opening and closing
+      // animate the height with a small overshoot (like the navbar stretch).
+      (function () {
+        const LINES = 8;
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        // Ease-out with a little overshoot past the target before settling
+        function easeOutBack(t) {
+          const c1 = 1.2, c3 = c1 + 1;
+          return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2);
+        }
+
+        document.querySelectorAll(".member").forEach(function (card) {
+          const wrap = card.querySelector(".member-bio-wrap");
+          const bio = card.querySelector(".member-bio");
+          const button = card.querySelector(".member-more");
+          if (!wrap || !button) return;
+          let open = false;
+          let animation = null;
+
+          function collapsedHeight() {
+            const style = getComputedStyle(bio);
+            const line = parseFloat(style.lineHeight) || parseFloat(style.fontSize) * 1.5;
+            return Math.round(line * LINES);
+          }
+
+          // Show the button only for long bios (rechecked on resize and language change)
+          function update() {
+            if (animation) return;
+            const tooLong = bio.scrollHeight > collapsedHeight() + 2;
+            button.hidden = !tooLong;
+            const collapsed = tooLong && !open;
+            wrap.style.height = collapsed ? collapsedHeight() + "px" : "";
+            wrap.classList.toggle("is-collapsed", collapsed);
+          }
+
+          function animateHeight(from, to, done) {
+            if (reduceMotion) return done();
+            const start = performance.now();
+            const duration = 550;
+            function frame(now) {
+              const t = Math.min((now - start) / duration, 1);
+              wrap.style.height = from + (to - from) * easeOutBack(t) + "px";
+              if (t < 1) animation = requestAnimationFrame(frame);
+              else {
+                animation = null;
+                done();
+              }
+            }
+            animation = requestAnimationFrame(frame);
+          }
+
+          button.addEventListener("click", function () {
+            if (animation) cancelAnimationFrame(animation);
+            animation = null;
+            const from = wrap.getBoundingClientRect().height;
+            open = !open;
+            button.setAttribute("aria-expanded", open);
+            if (open) {
+              wrap.classList.remove("is-collapsed");
+              animateHeight(from, bio.scrollHeight, function () {
+                wrap.style.height = "";
+              });
+            } else {
+              animateHeight(from, collapsedHeight(), function () {
+                wrap.style.height = collapsedHeight() + "px";
+                wrap.classList.add("is-collapsed");
+              });
+            }
+          });
+
+          update();
+          window.addEventListener("resize", update);
+          document.addEventListener("langchange", update);
+          if (document.fonts) document.fonts.ready.then(update);
+        });
+      })();
+    </script>
   </body>
 </html>
 

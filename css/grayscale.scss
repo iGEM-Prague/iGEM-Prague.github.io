@@ -961,8 +961,33 @@ body {
   margin-bottom: 0.5rem;
 }
 
-.member-bio {
+// Bio text justified (both edges aligned), at most 8 lines until "Show more" (members.html)
+.content-section.text-center p.member-bio {
+  text-align: justify;
+  // Hyphenation (by each text's lang: en / cs) keeps the gaps of justified lines even
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  max-width: none;
+  margin: 0;
+  padding: 0 0.25rem;
   font-size: 0.95em;
+}
+
+.member-bio-wrap {
+  overflow: hidden;
+  // Cut text fades out at the bottom
+  &.is-collapsed {
+    -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 1.5em), transparent);
+    mask-image: linear-gradient(to bottom, #000 calc(100% - 1.5em), transparent);
+  }
+}
+
+.member-more {
+  margin-top: 0.75rem;
+  &[aria-expanded="false"] .label-less,
+  &[aria-expanded="true"] .label-more {
+    display: none;
+  }
 }
 
 // Language switch: show only the texts of the current language (html[data-lang] is set in

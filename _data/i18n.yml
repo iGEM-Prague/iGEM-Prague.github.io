@@ -14,5 +14,8 @@ only_en: { cs: "anglicky" }
 read_in_en: "Read in English"
 read_in_cs: "Číst česky"
 switch_language: "Switch language / Přepnout jazyk"
+# Button under a long member bio on the Members page
+show_more: { en: "Show more", cs: "Zobrazit více" }
+show_less: { en: "Show less", cs: "Zobrazit méně" }
 # Heading above the sponsor logos in the footer (year pages)
 supported_by: { en: "Supported by", cs: "Podporují nás" }
