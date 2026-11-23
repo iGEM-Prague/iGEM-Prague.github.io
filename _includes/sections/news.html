@@ -10,7 +10,7 @@
       {% assign news_seen = "" %}
       <div class="post-list-container">
         {% for post in site.posts %}
-          {% assign post_year = post.date | date: "%Y" %}
+          {% assign post_year = post.date | date: "%Y" %}{% if post.year %}{% assign post_year = post.year | append: "" %}{% endif %}
           {% if post_year == sec_dir %}
             {% capture news_key %}|{{ post.date | date: "%F" }}/{{ post.slug }}|{% endcapture %}
             {% if news_seen contains news_key %}

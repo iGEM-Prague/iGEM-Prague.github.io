@@ -197,7 +197,8 @@ to `_posts/2027/cs/`.
 
 3. Put images to `img/2027/news/` and link them as shown above.
 
-The post's year (from its `date`) decides which year page it appears on.
+The folder (`_posts/2027/`) decides which year page a post appears on, not its date, so a
+post written in 2026 about the 2027 project belongs to `_posts/2027/`.
 The newest 3 posts are shown on the 2027 page, all of them on `/2027/news/`.
 
 ### Translating a post
@@ -232,7 +233,9 @@ Filtered views can be shared, e.g. `/2027/news/?category=labwork&q=plasmid`.
    `members:` list and change `header-text:` and `sponsors:`.
 2. Copy the folder `2027/` (page files) to `2028/` and in each of its three files
    replace `2027` by `2028` (`sections-dir`, `year`, `title`, `permalink`).
-3. Put the year's posts to `_posts/2028/en/` and `_posts/2028/cs/`, images to `img/2028/`.
-4. Add the year to the top of `events:` in `_sections/timeline.md` with `link: "/2028/"`.
+3. In `_config.yml`, under `defaults:`, copy the two `_posts/2027` entries and replace
+   `2027` by `2028` in them (they make posts in `_posts/2028/` belong to 2028).
+4. Put the year's posts to `_posts/2028/en/` and `_posts/2028/cs/`, images to `img/2028/`.
+5. Add the year to the top of `events:` in `_sections/timeline.md` with `link: "/2028/"`.
 
 Old years keep working unchanged.

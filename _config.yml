@@ -94,8 +94,9 @@ collections:
   sections:
     output: false
 
-# News posts: _posts/<year>/en/YYYY-MM-DD-title.md end up at /<year>/news/MM/DD/title/,
-# Czech ones in _posts/<year>/cs/ at /<year>/news/MM/DD/title/cs/. Same file name = translations.
+# News posts: _posts/<project year>/en/YYYY-MM-DD-title.md, Czech ones in .../cs/ (same file
+# name = translations). The folder decides the project year, not the post's date, so posts
+# written in 2026 about the 2027 project go to _posts/2027/ and appear on the 2027 pages.
 defaults:
   - scope:
       path: ""
@@ -110,6 +111,21 @@ defaults:
     values:
       lang: "cs"
       permalink: "/:year/news/:month/:day/:title/cs/"
+  # One pair of entries per project year (copy them for a new year):
+  # /2027/news/MM/DD/title/ and /2027/news/MM/DD/title/cs/
+  - scope:
+      path: "_posts/2027"
+      type: "posts"
+    values:
+      year: "2027"
+      permalink: "/2027/news/:month/:day/:title/"
+  - scope:
+      path: "_posts/2027/cs"
+      type: "posts"
+    values:
+      year: "2027"
+      lang: "cs"
+      permalink: "/2027/news/:month/:day/:title/cs/"
 
 # Exclusion list from the generated _site
 exclude:

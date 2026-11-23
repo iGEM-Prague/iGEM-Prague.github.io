@@ -1,5 +1,5 @@
 <!-- Post Layout Start -->
-{%- assign post_year = page.date | date: "%Y" -%}
+{%- assign post_year = page.date | date: "%Y" -%}{%- if page.year -%}{%- assign post_year = page.year | append: "" -%}{%- endif -%}
 {%- include find-translation.html post=page -%}
 
 <!doctype html>

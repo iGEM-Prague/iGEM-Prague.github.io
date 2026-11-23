@@ -5,7 +5,7 @@
 {%- assign year_posts = "" | split: "" -%}
 {%- assign categories = "" | split: "" -%}
 {%- for post in site.posts -%}
-  {%- assign post_year = post.date | date: "%Y" -%}
+  {%- assign post_year = post.date | date: "%Y" -%}{%- if post.year -%}{%- assign post_year = post.year | append: "" -%}{%- endif -%}
   {%- if post_year == sec_dir -%}
     {%- assign year_posts = year_posts | push: post -%}
     {%- assign categories = categories | concat: post.categories -%}

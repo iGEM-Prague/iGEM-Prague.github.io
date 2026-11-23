@@ -1,5 +1,5 @@
 <!-- Post List Start -->
-{%- assign post_year = post.date | date: "%Y" -%}
+{%- assign post_year = post.date | date: "%Y" -%}{%- if post.year -%}{%- assign post_year = post.year | append: "" -%}{%- endif -%}
 {%- assign news_url = "/" | append: post_year | append: "/news/" | relative_url -%}
 {%- include find-translation.html post=post -%}
 {%- capture post_search -%}
